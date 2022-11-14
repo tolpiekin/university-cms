@@ -1,7 +1,9 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Topic;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.TopicRepository;
 
@@ -23,7 +25,12 @@ public class TopicService {
     }
 
     public Optional<Topic> findById(Long id){
-        return topicRepository.findById(id);
+        try {
+            return Optional.of(topicRepository.findById(id)).orElseThrow(()->new TopicNotFoundException(id));
+        }
+        catch (TopicNotFoundException exc) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Topic Not Found", exc);
+        }
     }
 
     public List<Topic> findAll(){
@@ -37,6 +44,12 @@ public class TopicService {
     }
 
     public void deleteById(Long id){
+        try {
+            Optional.of(topicRepository.findById(id)).orElseThrow(()->new TopicNotFoundException(id));
+        }
+        catch (TopicNotFoundException exc) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Topic Not Found", exc);
+        }
         topicRepository.deleteById(id);
     }
 }

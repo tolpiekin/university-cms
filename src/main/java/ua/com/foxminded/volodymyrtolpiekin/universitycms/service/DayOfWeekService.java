@@ -1,7 +1,9 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.DayOfWeek;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.DayOfWeekRepository;
 
@@ -23,7 +25,12 @@ public class DayOfWeekService {
     }
 
     public Optional<DayOfWeek> findById(Long id){
-        return dayOfWeekRepository.findById(id);
+        try {
+            return Optional.of(dayOfWeekRepository.findById(id).orElseThrow(()-> new DayOfWeekNotFoundException(id)));
+        }
+        catch (DayOfWeekNotFoundException exc) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "DayOfWeek Not Found", exc);
+        }
     }
 
     public List<DayOfWeek> findAll(){
@@ -36,6 +43,12 @@ public class DayOfWeekService {
     }
 
     public void deleteById(Long id){
+        try {
+            Optional.of(findById(id)).orElseThrow(()->new DayOfWeekNotFoundException(id));
+        }
+        catch(DayOfWeekNotFoundException exc) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "DayOfWeek Not Found", exc);
+        }
         dayOfWeekRepository.deleteById(id);
     }
 }

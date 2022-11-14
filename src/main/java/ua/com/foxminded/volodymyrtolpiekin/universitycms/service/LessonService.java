@@ -1,7 +1,9 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Lesson;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.LessonRepository;
 
@@ -23,7 +25,12 @@ public class LessonService {
     }
 
     public Optional<Lesson> findById(Long id){
-        return lessonRepository.findById(id);
+        try {
+            return Optional.of(lessonRepository.findById(id)).orElseThrow(()->new LessonNotFoundException(id));
+        }
+        catch (LessonNotFoundException exc) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lesson Not Found", exc);
+        }
     }
 
     public List<Lesson> findAll(){
@@ -37,6 +44,12 @@ public class LessonService {
     }
 
     public void deleteById(Long id){
+        try {
+            Optional.of(lessonRepository.findById(id)).orElseThrow(()->new LessonNotFoundException(id));
+        }
+        catch (LessonNotFoundException exc) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lesson Not Found", exc);
+        }
         lessonRepository.deleteById(id);
     }
 }

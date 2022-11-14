@@ -1,7 +1,9 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Timetable;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.TimetableRepository;
 
@@ -24,7 +26,12 @@ public class TimetableService {
     }
 
     public Optional<Timetable> findById(Long id){
-        return timetableRepository.findById(id);
+        try {
+            return Optional.of(timetableRepository.findById(id)).orElseThrow(()->new TimetableNotFoundException(id));
+        }
+        catch (TimetableNotFoundException exc) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Timetable Not Found", exc);
+        }
     }
 
     public List<Timetable> findAll(){
@@ -38,6 +45,12 @@ public class TimetableService {
     }
 
     public void deleteById(Long id){
+        try {
+            Optional.of(timetableRepository.findById(id)).orElseThrow(()->new TimetableNotFoundException(id));
+        }
+        catch (TimetableNotFoundException exc) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Timetable Not Found", exc);
+        }
         timetableRepository.deleteById(id);
     }
 }

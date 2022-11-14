@@ -1,7 +1,9 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Group;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.GroupRepository;
 
@@ -23,7 +25,12 @@ public class GroupService {
     }
 
     public Optional<Group> findById(Long id){
-        return groupRepository.findById(id);
+        try {
+            return Optional.of(groupRepository.findById(id)).orElseThrow(()->new GroupNotFoundException(id));
+        }
+        catch (GroupNotFoundException exc) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group Not Found", exc);
+        }
     }
 
     public List<Group> findAll(){
@@ -37,6 +44,12 @@ public class GroupService {
     }
 
     public void deleteById(Long id){
+        try {
+            Optional.of(findById(id)).orElseThrow(()->new GroupNotFoundException(id));
+        }
+        catch (GroupNotFoundException exc) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group Not Found", exc);
+        }
         groupRepository.deleteById(id);
     }
 }
