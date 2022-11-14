@@ -1,19 +1,23 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "groups")
 public class Group {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private Long id;
     private String name;
+
+    @OneToMany(mappedBy = "group")
+    private List<Course> courses;
+
+    @OneToMany(mappedBy = "group")
     private List<Student> students;
+
 
     public Group() {
     }
@@ -64,5 +68,13 @@ public class Group {
 
     public void setStudents(List<Student> students) {
         this.students = students;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 }

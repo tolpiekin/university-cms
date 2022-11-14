@@ -1,17 +1,17 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "tutors")
 public class Tutor extends Person {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private Long id;
+    private String name;
+    @OneToMany(mappedBy = "tutor")
     private List<Course> courses;
 
     public Tutor() {

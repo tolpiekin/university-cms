@@ -1,21 +1,28 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
+@Table(name = "courses")
 public class Course {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private Long id;
     private String name;
+
+    @OneToMany(mappedBy = "course")
+    private List<Lesson> lessons;
+
+    @ManyToOne
+    private Group group;
+
+    @OneToMany(mappedBy = "course")
     private List<Topic> topics;
-    private List<Student> students;
+
+    @ManyToOne
+    private Tutor tutor;
 
     public Course() {
     }
@@ -25,7 +32,7 @@ public class Course {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Course course = (Course) o;
-        return id.equals(course.id) && Objects.equals(name, course.name) && Objects.equals(topics, course.topics) && Objects.equals(students, course.students);
+        return id.equals(course.id);
     }
 
     @Override
@@ -41,7 +48,6 @@ public class Course {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", topics=" + topics +
-                ", students=" + students +
                 '}';
     }
 
@@ -69,11 +75,27 @@ public class Course {
         this.topics = topics;
     }
 
-    public List<Student> getStudents() {
-        return students;
+    public Group getGroup() {
+        return group;
     }
 
-    public void setStudents(List<Student> students) {
-        this.students = students;
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public Tutor getTutor() {
+        return tutor;
+    }
+
+    public void setTutor(Tutor tutor) {
+        this.tutor = tutor;
+    }
+
+    public List<Lesson> getLessons() {
+        return lessons;
+    }
+
+    public void setLessons(List<Lesson> lessons) {
+        this.lessons = lessons;
     }
 }

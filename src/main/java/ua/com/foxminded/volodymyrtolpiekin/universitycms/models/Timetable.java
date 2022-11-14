@@ -5,28 +5,26 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class DayOfWeek {
+public class Timetable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private Long id;
-    private Date date;
+    private Date validFrom;
+    private Date validTill;
 
-    @OneToMany(mappedBy = "dayOfWeek")
-    private List<Lesson> lessons;
+    @OneToMany(mappedBy = "timetable")
+    private List<DayOfWeek> days;
 
-    @ManyToOne
-    private Timetable timetable;
-
-    public DayOfWeek() {
+    public Timetable() {
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        DayOfWeek dayOfWeek = (DayOfWeek) o;
-        return id.equals(dayOfWeek.id);
+        Timetable timeTable = (Timetable) o;
+        return id.equals(timeTable.id);
     }
 
     @Override
@@ -38,10 +36,11 @@ public class DayOfWeek {
 
     @Override
     public String toString() {
-        return "DayOfWeek{" +
+        return "TimeTable{" +
                 "id=" + id +
-                ", date=" + date +
-                ", lessons=" + lessons +
+                ", start=" + validFrom +
+                ", end=" + validTill +
+                ", days=" + days +
                 '}';
     }
 
@@ -53,27 +52,27 @@ public class DayOfWeek {
         this.id = id;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getValidFrom() {
+        return validFrom;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setValidFrom(Date validFrom) {
+        this.validFrom = validFrom;
     }
 
-    public List<Lesson> getLessons() {
-        return lessons;
+    public Date getValidTill() {
+        return validTill;
     }
 
-    public void setLessons(List<Lesson> lessons) {
-        this.lessons = lessons;
+    public void setValidTill(Date validTill) {
+        this.validTill = validTill;
     }
 
-    public Timetable getTimeTable() {
-        return timetable;
+    public List<DayOfWeek> getDays() {
+        return days;
     }
 
-    public void setTimeTable(Timetable timetable) {
-        this.timetable = timetable;
+    public void setDays(List<DayOfWeek> days) {
+        this.days = days;
     }
 }

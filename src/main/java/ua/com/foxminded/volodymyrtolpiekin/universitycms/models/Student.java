@@ -1,18 +1,16 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.List;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "students")
 public class Student extends Person{
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private Long id;
+    private String name;
+    @ManyToOne
     private Group group;
-    private List<Course> courses;
 
     public Student() {
     }
@@ -38,7 +36,6 @@ public class Student extends Person{
         return "Student{" +
                 "id=" + id +
                 ", group=" + group +
-                ", courses=" + courses +
                 '}';
     }
 
@@ -56,13 +53,5 @@ public class Student extends Person{
 
     public void setGroup(Group group) {
         this.group = group;
-    }
-
-    public List<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
     }
 }

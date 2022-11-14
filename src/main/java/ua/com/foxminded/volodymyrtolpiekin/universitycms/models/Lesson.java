@@ -1,23 +1,32 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
+@Table(name = "lessons")
 public class Lesson {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private Long id;
     private Date start;
     private String location;
     private int hours;
-    private List<Group> groups;
+
+    @OneToOne
+    @JoinColumn
+    private Group group;
+
+    @OneToOne
+    @JoinColumn
     private Course course;
+
+    @OneToOne
+    @JoinColumn
     private Tutor tutor;
+
+    @ManyToOne
+    private DayOfWeek dayOfWeek;
 
     public Lesson() {
     }
@@ -44,7 +53,7 @@ public class Lesson {
                 ", start=" + start +
                 ", location='" + location + '\'' +
                 ", hours=" + hours +
-                ", groups=" + groups +
+                ", group=" + group +
                 ", course=" + course +
                 ", tutor=" + tutor +
                 '}';
@@ -82,12 +91,12 @@ public class Lesson {
         this.hours = hours;
     }
 
-    public List<Group> getGroups() {
-        return groups;
+    public Group getGroup() {
+        return group;
     }
 
-    public void setGroups(List<Group> groups) {
-        this.groups = groups;
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     public Course getCourse() {

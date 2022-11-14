@@ -1,18 +1,19 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "topics")
 public class Topic {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private Long id;
     public String name;
-    public String sunject;
+    public String subject;
+
+    @ManyToOne
+    public Course course;
 
     public Topic() {
     }
@@ -37,7 +38,7 @@ public class Topic {
         return "Topic{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", sunject='" + sunject + '\'' +
+                ", sunject='" + subject + '\'' +
                 '}';
     }
 
@@ -57,11 +58,19 @@ public class Topic {
         this.name = name;
     }
 
-    public String getSunject() {
-        return sunject;
+    public String getSubject() {
+        return subject;
     }
 
-    public void setSunject(String sunject) {
-        this.sunject = sunject;
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }
