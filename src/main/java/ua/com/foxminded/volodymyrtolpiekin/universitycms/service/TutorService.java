@@ -19,7 +19,8 @@ public class TutorService {
     }
 
     public Optional<Tutor> addTutor(Tutor tutor){
-        return Optional.of(tutorRepository.save(tutor));
+        tutorRepository.save(tutor);
+        return tutorRepository.findById(tutor.getId());
     }
 
     public Optional<Tutor> findById(Long id){

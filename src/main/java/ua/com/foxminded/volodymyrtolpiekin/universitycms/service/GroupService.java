@@ -21,7 +21,8 @@ public class GroupService {
     }
 
     public Optional<Group> addGroup(Group group){
-        return Optional.of(groupRepository.save(group));
+        groupRepository.save(group);
+        return groupRepository.findById(group.getId());
     }
 
     public Optional<Group> findById(Long id){

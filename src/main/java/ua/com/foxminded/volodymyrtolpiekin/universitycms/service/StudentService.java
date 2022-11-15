@@ -21,7 +21,8 @@ public class StudentService {
     }
 
     public Optional<Student> addStudent(Student student){
-        return Optional.of(studentRepository.save(student));
+        studentRepository.save(student);
+        return findById(student.getId());
     }
 
     public Optional<Student> findById(Long id){

@@ -21,7 +21,8 @@ public class TopicService {
     }
 
     public Optional<Topic> addTopic(Topic topic){
-        return Optional.of(topicRepository.save(topic));
+        topicRepository.save(topic);
+        return topicRepository.findById(topic.getId());
     }
 
     public Optional<Topic> findById(Long id){

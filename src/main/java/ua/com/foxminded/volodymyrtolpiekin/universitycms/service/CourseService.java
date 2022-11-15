@@ -20,7 +20,8 @@ public class CourseService {
     }
 
     public Optional<Course> addCourse(Course course){
-        return Optional.of(courseRepository.save(course));
+        courseRepository.save(course);
+        return courseRepository.findById(course.getId());
     }
 
     public Optional<Course> findById(Long id){

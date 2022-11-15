@@ -21,7 +21,8 @@ public class DayOfWeekService {
     }
 
     public Optional<DayOfWeek> addDayOfWeek(DayOfWeek dayOfWeek){
-        return Optional.of(dayOfWeekRepository.save(dayOfWeek));
+        dayOfWeekRepository.save(dayOfWeek);
+        return dayOfWeekRepository.findById(dayOfWeek.getId());
     }
 
     public Optional<DayOfWeek> findById(Long id){

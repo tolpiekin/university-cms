@@ -21,7 +21,8 @@ public class LessonService {
     }
 
     public Optional<Lesson> addLesson(Lesson lesson){
-        return Optional.of(lessonRepository.save(lesson));
+        lessonRepository.save(lesson);
+        return lessonRepository.findById(lesson.getId());
     }
 
     public Optional<Lesson> findById(Long id){

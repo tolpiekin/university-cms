@@ -22,7 +22,8 @@ public class TimetableService {
 
 
     public Optional<Timetable> addTimetable(Timetable timetable){
-        return Optional.of(timetableRepository.save(timetable));
+        timetableRepository.save(timetable);
+        return timetableRepository.findById(timetable.getId());
     }
 
     public Optional<Timetable> findById(Long id){
