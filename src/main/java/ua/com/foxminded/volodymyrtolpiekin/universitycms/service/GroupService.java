@@ -7,7 +7,6 @@ import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Group;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.GroupRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class GroupService {
@@ -23,8 +22,8 @@ public class GroupService {
     }
 
     public Group findById(Long id){
-        return Optional.of(groupRepository.findById(id)).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Group Not Found")).get();
+        return groupRepository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Group Not Found"));
     }
 
     public List<Group> findAll(){
@@ -36,8 +35,7 @@ public class GroupService {
     }
 
     public void deleteById(Long id){
-        Optional.of(findById(id)).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Group Not Found"));
+        findById(id);
         groupRepository.deleteById(id);
     }
 }

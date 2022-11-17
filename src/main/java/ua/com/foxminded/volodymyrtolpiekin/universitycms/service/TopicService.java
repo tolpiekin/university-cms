@@ -7,7 +7,6 @@ import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Topic;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.TopicRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TopicService {
@@ -23,8 +22,8 @@ public class TopicService {
     }
 
     public Topic findById(Long id){
-        return Optional.of(topicRepository.findById(id)).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Topic Not Found")).get();
+        return topicRepository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Topic Not Found"));
     }
 
     public List<Topic> findAll(){
@@ -36,8 +35,7 @@ public class TopicService {
     }
 
     public void deleteById(Long id){
-        Optional.of(topicRepository.findById(id)).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Topic Not Found"));
+        findById(id);
         topicRepository.deleteById(id);
     }
 }

@@ -7,7 +7,6 @@ import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.DayOfWeek;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.DayOfWeekRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DayOfWeekService {
@@ -24,8 +23,8 @@ public class DayOfWeekService {
     }
 
     public DayOfWeek findById(Long id){
-        return Optional.of(dayOfWeekRepository.findById(id)).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "DayOfWeek not found")).get();
+        return dayOfWeekRepository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "DayOfWeek not found"));
     }
 
     public List<DayOfWeek> findAll(){
@@ -37,8 +36,7 @@ public class DayOfWeekService {
     }
 
     public void deleteById(Long id){
-        Optional.of(findById(id)).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "DayOfWeek Not Found"));
+        findById(id);
         dayOfWeekRepository.deleteById(id);
     }
 }

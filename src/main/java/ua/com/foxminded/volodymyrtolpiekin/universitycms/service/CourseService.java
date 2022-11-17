@@ -7,7 +7,6 @@ import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Course;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.CourseRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CourseService {
@@ -22,8 +21,8 @@ public class CourseService {
     }
 
     public Course findById(Long id){
-        return Optional.of(courseRepository.findById(id)).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND,"Course not found")).get();
+        return courseRepository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND,"Course not found"));
     }
 
     public List<Course> findAll(){
@@ -35,8 +34,7 @@ public class CourseService {
     }
 
     public void deleteById(Long id){
-        Optional.of(findById(id)).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Course Not Found"));
+        findById(id);
         courseRepository.deleteById(id);
     }
 }

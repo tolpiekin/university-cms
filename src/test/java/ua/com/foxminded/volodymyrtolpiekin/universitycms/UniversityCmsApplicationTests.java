@@ -72,18 +72,18 @@ class UniversityCmsApplicationTests {
 		student.setId(1l);
 		student.setName("Taras Shevchenko");
 		student.setGroup(group);
-		doReturn(Optional.of(student)).when(studentRepository).findById(1l);
-		Optional<Student> returnedStudent = studentService.findById(1l);
-		Assertions.assertTrue(returnedStudent.isPresent(), "Student was found");
-		Assertions.assertSame(returnedStudent.get(), student, "The student returned was not the same as the mock");
+		doReturn(student).when(studentRepository.findById(1l));
+		Student returnedStudent = studentService.findById(1l);
+		Assertions.assertNotNull(returnedStudent, "Student was found");
+		Assertions.assertSame(returnedStudent, student, "The student returned was the same as the mock");
 	}
 
 	@Test
 	@DisplayName("Test findStudentById Not Found")
 	void testFindStudentByIdNotFound() {
-		doReturn(Optional.empty()).when(studentRepository).findById(1l);
-		Optional<Student> returnedStudent = studentService.findById(1l);
-		Assertions.assertFalse(returnedStudent.isPresent(), "Student should not be found");
+		doReturn(null).when(studentRepository).findById(1l);
+		Student returnedStudent = studentService.findById(1l);
+		Assertions.assertNotNull(returnedStudent, "Student should not be found");
 	}
 
 	@Test
@@ -115,10 +115,10 @@ class UniversityCmsApplicationTests {
 		student.setId(1l);
 		student.setName("John Doe");
 		student.setGroup(group);
-		doReturn(Optional.of(student)).when(studentRepository).findById(student.getId());
-		Optional<Student> returnedStudent = studentService.addStudent(student);
+		doReturn(student).when(studentRepository).findById(student.getId());
+		Student returnedStudent = studentService.addStudent(student);
 		Assertions.assertNotNull(returnedStudent, "The saved student should not be null");
-		Assertions.assertEquals(returnedStudent, Optional.of(student), "Should be the same student");
+		Assertions.assertEquals(returnedStudent, student, "Should be the same student");
 	}
 
 	@Test
@@ -134,18 +134,18 @@ class UniversityCmsApplicationTests {
 		course.setName("Main course");
 		course.setGroup(group);
 
-		doReturn(Optional.of(course)).when(courseRepository).findById(1l);
-		Optional<Course> returnedCourse = courseService.findById(1l);
-		Assertions.assertTrue(returnedCourse.isPresent(), "Course was found");
-		Assertions.assertSame(returnedCourse.get(), course, "The course returned was not the same as the mock");
+		doReturn(course).when(courseRepository).findById(1l);
+		Course returnedCourse = courseService.findById(1l);
+		Assertions.assertNotNull(returnedCourse, "Course was found");
+		Assertions.assertSame(returnedCourse, course, "The course returned was not the same as the mock");
 	}
 
 	@Test
 	@DisplayName("Test findCourseById Not Found")
 	void testFindCourseByIdNotFound() {
-		doReturn(Optional.empty()).when(courseRepository).findById(1l);
-		Optional<Course> returnedCourse = courseService.findById(1l);
-		Assertions.assertFalse(returnedCourse.isPresent(), "Course should not be found");
+		doReturn(null).when(courseRepository).findById(1l);
+		Course returnedCourse = courseService.findById(1l);
+		Assertions.assertNull(returnedCourse, "Course should not be found");
 	}
 
 	@Test
@@ -184,10 +184,10 @@ class UniversityCmsApplicationTests {
 		course.setName("Main course");
 		course.setGroup(group);
 
-		doReturn(Optional.of(course)).when(courseRepository).findById(course.getId());
-		Optional<Course> returnedCourse = courseService.addCourse(course);
+		doReturn(course).when(courseRepository).save(course);
+		Course returnedCourse = courseService.addCourse(course);
 		Assertions.assertNotNull(returnedCourse, "The saved course should not be null");
-		Assertions.assertEquals(returnedCourse, Optional.of(course), "Should be the same course");
+		Assertions.assertEquals(returnedCourse, course, "Should be the same course");
 	}
 
 	@Test
@@ -197,18 +197,18 @@ class UniversityCmsApplicationTests {
 		DayOfWeek dayOfWeek = new DayOfWeek();
 		dayOfWeek.setId(1l);
 
-		doReturn(Optional.of(dayOfWeek)).when(dayOfWeekRepository).findById(1l);
-		Optional<DayOfWeek> returnedDayOfWeek = dayOfWeekService.findById(1l);
-		Assertions.assertTrue(returnedDayOfWeek.isPresent(), "DayOfWeek was found");
-		Assertions.assertSame(returnedDayOfWeek.get(), dayOfWeek, "The dayOfWeek returned was not the same as the mock");
+		doReturn(dayOfWeek).when(dayOfWeekRepository).findById(1l);
+		DayOfWeek returnedDayOfWeek = dayOfWeekService.findById(1l);
+		Assertions.assertNotNull(returnedDayOfWeek, "DayOfWeek was found");
+		Assertions.assertSame(returnedDayOfWeek, dayOfWeek, "The dayOfWeek returned was not the same as the mock");
 	}
 
 	@Test
 	@DisplayName("Test findDayOfWeekById Not Found")
 	void testFindDayOfWeekByIdNotFound() {
-		doReturn(Optional.empty()).when(dayOfWeekRepository).findById(1l);
-		Optional<DayOfWeek> returnedDayOfWeek = dayOfWeekService.findById(1l);
-		Assertions.assertFalse(returnedDayOfWeek.isPresent(), "DayOfWeek should not be found");
+		doReturn(null).when(dayOfWeekRepository).findById(1l);
+		DayOfWeek returnedDayOfWeek = dayOfWeekService.findById(1l);
+		Assertions.assertNull(returnedDayOfWeek, "DayOfWeek should not be found");
 	}
 
 	@Test
@@ -233,9 +233,9 @@ class UniversityCmsApplicationTests {
 		DayOfWeek dayOfWeek = new DayOfWeek();
 		dayOfWeek.setId(1l);
 
-		doReturn(Optional.of(dayOfWeek)).when(dayOfWeekRepository).findById(dayOfWeek.getId());
-		Optional<DayOfWeek> returnedDayOfWeek = dayOfWeekService.addDayOfWeek(dayOfWeek);
+		doReturn(dayOfWeek).when(dayOfWeekRepository).save(dayOfWeek);
+		DayOfWeek returnedDayOfWeek = dayOfWeekService.addDayOfWeek(dayOfWeek);
 		Assertions.assertNotNull(returnedDayOfWeek, "The saved dayOfWeek should not be null");
-		Assertions.assertEquals(returnedDayOfWeek, Optional.of(dayOfWeek), "Should be the same dayOfWeek");
+		Assertions.assertEquals(returnedDayOfWeek, dayOfWeek, "Should be the same dayOfWeek");
 	}
 }

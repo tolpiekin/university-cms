@@ -7,7 +7,6 @@ import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Timetable;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.TimetableRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TimetableService {
@@ -18,14 +17,13 @@ public class TimetableService {
         this.timetableRepository = timetableRepository;
     }
 
-
     public Timetable addTimetable(Timetable timetable){
         return timetableRepository.save(timetable);
     }
 
     public Timetable findById(Long id){
-        return Optional.of(timetableRepository.findById(id)).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Timetable Not Found")).get();
+        return timetableRepository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Timetable Not Found"));
     }
 
     public List<Timetable> findAll(){
@@ -37,8 +35,7 @@ public class TimetableService {
     }
 
     public void deleteById(Long id){
-        Optional.of(timetableRepository.findById(id)).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Timetable Not Found"));
+        findById(id);
         timetableRepository.deleteById(id);
     }
 }

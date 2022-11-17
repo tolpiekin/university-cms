@@ -7,7 +7,6 @@ import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Student;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.StudentRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -23,8 +22,8 @@ public class StudentService {
     }
 
     public Student findById(Long id){
-        return Optional.of(studentRepository.findById(id)).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Student Not Found")).get();
+        return studentRepository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Student Not Found"));
     }
 
     public List<Student> findAll(){
@@ -36,8 +35,7 @@ public class StudentService {
     }
 
     public void deleteById(Long id){
-        Optional.of(studentRepository.findById(id)).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Student Not Found"));
+        findById(id);
         studentRepository.deleteById(id);
     }
 }
