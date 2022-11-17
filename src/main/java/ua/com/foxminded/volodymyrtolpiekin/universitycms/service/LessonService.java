@@ -31,7 +31,7 @@ public class LessonService {
         return lessonRepository.findAll();
     }
 
-    public Lesson update(Long id, Lesson lesson){
+    public Lesson update(Lesson lesson){
         return lessonRepository.save(lesson);
     }
 

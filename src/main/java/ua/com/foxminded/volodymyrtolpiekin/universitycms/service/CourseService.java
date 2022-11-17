@@ -6,7 +6,6 @@ import org.springframework.web.server.ResponseStatusException;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Course;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.CourseRepository;
 
-import javax.xml.ws.Response;
 import java.util.List;
 import java.util.Optional;
 
