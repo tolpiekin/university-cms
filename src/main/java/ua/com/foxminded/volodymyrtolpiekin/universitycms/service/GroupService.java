@@ -31,10 +31,8 @@ public class GroupService {
         return groupRepository.findAll();
     }
 
-    public Optional<Group> update(Long id, Group group){
-        group.setId(id);
-        groupRepository.save(group);
-        return groupRepository.findById(id);
+    public Group update(Group group){
+        return groupRepository.save(group);
     }
 
     public void deleteById(Long id){

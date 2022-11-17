@@ -32,9 +32,8 @@ public class DayOfWeekService {
         return dayOfWeekRepository.findAll();
     }
 
-    public Optional<DayOfWeek> update(Long id, DayOfWeek dayOfWeek){
-        dayOfWeek.setId(id);
-        return Optional.of(dayOfWeekRepository.save(dayOfWeek));
+    public DayOfWeek update(DayOfWeek dayOfWeek){
+        return dayOfWeekRepository.save(dayOfWeek);
     }
 
     public void deleteById(Long id){

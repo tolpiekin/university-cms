@@ -31,10 +31,8 @@ public class LessonService {
         return lessonRepository.findAll();
     }
 
-    public Optional<Lesson> update(Long id, Lesson lesson){
-        lesson.setId(id);
-        lessonRepository.save(lesson);
-        return lessonRepository.findById(id);
+    public Lesson update(Long id, Lesson lesson){
+        return lessonRepository.save(lesson);
     }
 
     public void deleteById(Long id){

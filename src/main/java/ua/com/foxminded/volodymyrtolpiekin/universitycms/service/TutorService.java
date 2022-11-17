@@ -31,10 +31,8 @@ public class TutorService {
         return tutorRepository.findAll();
     }
 
-    public Optional<Tutor> update(Long id, Tutor tutor){
-        tutor.setId(id);
-        tutorRepository.save(tutor);
-        return tutorRepository.findById(id);
+    public Tutor update(Tutor tutor){
+        return tutorRepository.save(tutor);
     }
 
     public void deleteById(Long id){

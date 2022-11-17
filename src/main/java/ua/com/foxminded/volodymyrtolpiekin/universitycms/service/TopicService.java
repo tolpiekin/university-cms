@@ -31,10 +31,8 @@ public class TopicService {
         return topicRepository.findAll();
     }
 
-    public Optional<Topic> update(Long id,Topic topic){
-        topic.setId(id);
-        topicRepository.save(topic);
-        return topicRepository.findById(id);
+    public Topic update(Topic topic){
+        return topicRepository.save(topic);
     }
 
     public void deleteById(Long id){

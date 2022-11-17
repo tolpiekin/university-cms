@@ -31,10 +31,8 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
-    public Optional<Student> update(Long id, Student student){
-        student.setId(id);
-        studentRepository.save(student);
-        return studentRepository.findById(id);
+    public Student update(Student student){
+        return studentRepository.save(student);
     }
 
     public void deleteById(Long id){

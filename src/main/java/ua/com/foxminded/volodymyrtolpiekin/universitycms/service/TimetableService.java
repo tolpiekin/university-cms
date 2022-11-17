@@ -32,10 +32,8 @@ public class TimetableService {
         return timetableRepository.findAll();
     }
 
-    public Optional<Timetable> update(Long id, Timetable timetable){
-        timetable.setId(id);
-        timetableRepository.save(timetable);
-        return timetableRepository.findById(id);
+    public Timetable update(Timetable timetable){
+        return timetableRepository.save(timetable);
     }
 
     public void deleteById(Long id){

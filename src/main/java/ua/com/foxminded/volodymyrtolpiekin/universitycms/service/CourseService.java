@@ -31,10 +31,8 @@ public class CourseService {
         return courseRepository.findAll();
     }
 
-    public Optional<Course> update(Long id, Course course){
-        course.setId(id);
-        courseRepository.save(course);
-        return courseRepository.findById(id);
+    public Course update(Course course){
+        return courseRepository.save(course);
     }
 
     public void deleteById(Long id){
