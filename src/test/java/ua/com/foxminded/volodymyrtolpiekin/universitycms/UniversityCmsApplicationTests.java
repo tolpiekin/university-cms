@@ -72,18 +72,10 @@ class UniversityCmsApplicationTests {
 		student.setId(1l);
 		student.setName("Taras Shevchenko");
 		student.setGroup(group);
-		doReturn(student).when(studentRepository.findById(1l));
+		doReturn(Optional.of(student)).when(studentRepository).findById(1l);
 		Student returnedStudent = studentService.findById(1l);
 		Assertions.assertNotNull(returnedStudent, "Student was found");
-		Assertions.assertSame(returnedStudent, student, "The student returned was the same as the mock");
-	}
-
-	@Test
-	@DisplayName("Test findStudentById Not Found")
-	void testFindStudentByIdNotFound() {
-		doReturn(null).when(studentRepository).findById(1l);
-		Student returnedStudent = studentService.findById(1l);
-		Assertions.assertNotNull(returnedStudent, "Student should not be found");
+		Assertions.assertSame(returnedStudent, student, "The student returned was not the same as the mock");
 	}
 
 	@Test
@@ -108,14 +100,11 @@ class UniversityCmsApplicationTests {
 	@Test
 	@DisplayName("Test add student")
 	void testAddStudent() {
-		Group group = new Group();
-		group.setId(1l);
-		group.setName("Test group");
 		Student student = new Student();
 		student.setId(1l);
 		student.setName("John Doe");
-		student.setGroup(group);
-		doReturn(student).when(studentRepository).findById(student.getId());
+
+		doReturn(student).when(studentRepository).save(student);
 		Student returnedStudent = studentService.addStudent(student);
 		Assertions.assertNotNull(returnedStudent, "The saved student should not be null");
 		Assertions.assertEquals(returnedStudent, student, "Should be the same student");
@@ -134,18 +123,10 @@ class UniversityCmsApplicationTests {
 		course.setName("Main course");
 		course.setGroup(group);
 
-		doReturn(course).when(courseRepository).findById(1l);
+		doReturn(Optional.of(course)).when(courseRepository).findById(1l);
 		Course returnedCourse = courseService.findById(1l);
 		Assertions.assertNotNull(returnedCourse, "Course was found");
 		Assertions.assertSame(returnedCourse, course, "The course returned was not the same as the mock");
-	}
-
-	@Test
-	@DisplayName("Test findCourseById Not Found")
-	void testFindCourseByIdNotFound() {
-		doReturn(null).when(courseRepository).findById(1l);
-		Course returnedCourse = courseService.findById(1l);
-		Assertions.assertNull(returnedCourse, "Course should not be found");
 	}
 
 	@Test
@@ -197,18 +178,10 @@ class UniversityCmsApplicationTests {
 		DayOfWeek dayOfWeek = new DayOfWeek();
 		dayOfWeek.setId(1l);
 
-		doReturn(dayOfWeek).when(dayOfWeekRepository).findById(1l);
+		doReturn(Optional.of(dayOfWeek)).when(dayOfWeekRepository).findById(1l);
 		DayOfWeek returnedDayOfWeek = dayOfWeekService.findById(1l);
 		Assertions.assertNotNull(returnedDayOfWeek, "DayOfWeek was found");
 		Assertions.assertSame(returnedDayOfWeek, dayOfWeek, "The dayOfWeek returned was not the same as the mock");
-	}
-
-	@Test
-	@DisplayName("Test findDayOfWeekById Not Found")
-	void testFindDayOfWeekByIdNotFound() {
-		doReturn(null).when(dayOfWeekRepository).findById(1l);
-		DayOfWeek returnedDayOfWeek = dayOfWeekService.findById(1l);
-		Assertions.assertNull(returnedDayOfWeek, "DayOfWeek should not be found");
 	}
 
 	@Test
