@@ -22,9 +22,9 @@ public class GroupService {
         return groupRepository.save(group);
     }
 
-    public Optional<Group> findById(Long id){
+    public Group findById(Long id){
         return Optional.of(groupRepository.findById(id)).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Group Not Found"));
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Group Not Found")).get();
     }
 
     public List<Group> findAll(){

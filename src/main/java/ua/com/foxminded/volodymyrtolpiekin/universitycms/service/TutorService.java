@@ -22,9 +22,9 @@ public class TutorService {
         return tutorRepository.save(tutor);
     }
 
-    public Optional<Tutor> findById(Long id){
+    public Tutor findById(Long id){
         return Optional.of(tutorRepository.findById(id)).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Tutor Not Found"));
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Tutor Not Found")).get();
     }
 
     public List<Tutor> findAll(){

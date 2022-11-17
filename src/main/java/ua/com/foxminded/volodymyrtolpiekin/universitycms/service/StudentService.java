@@ -22,9 +22,9 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
-    public Optional<Student> findById(Long id){
+    public Student findById(Long id){
         return Optional.of(studentRepository.findById(id)).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Student Not Found"));
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Student Not Found")).get();
     }
 
     public List<Student> findAll(){

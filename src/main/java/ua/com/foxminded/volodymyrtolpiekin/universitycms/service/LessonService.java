@@ -22,9 +22,9 @@ public class LessonService {
         return lessonRepository.save(lesson);
     }
 
-    public Optional<Lesson> findById(Long id){
+    public Lesson findById(Long id){
         return Optional.of(lessonRepository.findById(id)).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Lesson Not Found"));
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Lesson Not Found")).get();
     }
 
     public List<Lesson> findAll(){

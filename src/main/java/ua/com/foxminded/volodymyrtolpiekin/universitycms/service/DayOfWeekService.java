@@ -23,9 +23,9 @@ public class DayOfWeekService {
         return dayOfWeekRepository.save(dayOfWeek);
     }
 
-    public Optional<DayOfWeek> findById(Long id){
+    public DayOfWeek findById(Long id){
         return Optional.of(dayOfWeekRepository.findById(id)).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "DayOfWeek not found"));
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "DayOfWeek not found")).get();
     }
 
     public List<DayOfWeek> findAll(){

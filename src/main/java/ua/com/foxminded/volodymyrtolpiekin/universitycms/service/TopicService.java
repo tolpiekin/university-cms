@@ -22,9 +22,9 @@ public class TopicService {
         return topicRepository.save(topic);
     }
 
-    public Optional<Topic> findById(Long id){
+    public Topic findById(Long id){
         return Optional.of(topicRepository.findById(id)).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Topic Not Found"));
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Topic Not Found")).get();
     }
 
     public List<Topic> findAll(){

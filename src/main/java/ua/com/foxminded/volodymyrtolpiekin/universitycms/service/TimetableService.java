@@ -23,9 +23,9 @@ public class TimetableService {
         return timetableRepository.save(timetable);
     }
 
-    public Optional<Timetable> findById(Long id){
+    public Timetable findById(Long id){
         return Optional.of(timetableRepository.findById(id)).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Timetable Not Found"));
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Timetable Not Found")).get();
     }
 
     public List<Timetable> findAll(){
