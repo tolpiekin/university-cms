@@ -1,6 +1,5 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -14,7 +13,6 @@ import java.util.Optional;
 public class CourseService {
     private final CourseRepository courseRepository;
 
-    @Autowired
     public CourseService(CourseRepository courseRepository) {
         this.courseRepository = courseRepository;
     }
