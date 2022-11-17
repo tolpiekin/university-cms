@@ -18,9 +18,8 @@ public class LessonService {
         this.lessonRepository = lessonRepository;
     }
 
-    public Optional<Lesson> addLesson(Lesson lesson){
-        lessonRepository.save(lesson);
-        return lessonRepository.findById(lesson.getId());
+    public Lesson addLesson(Lesson lesson){
+        return lessonRepository.save(lesson);
     }
 
     public Optional<Lesson> findById(Long id){

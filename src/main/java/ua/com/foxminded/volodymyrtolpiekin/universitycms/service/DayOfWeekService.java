@@ -19,9 +19,8 @@ public class DayOfWeekService {
         this.dayOfWeekRepository = dayOfWeekRepository;
     }
 
-    public Optional<DayOfWeek> addDayOfWeek(DayOfWeek dayOfWeek){
-        dayOfWeekRepository.save(dayOfWeek);
-        return dayOfWeekRepository.findById(dayOfWeek.getId());
+    public DayOfWeek addDayOfWeek(DayOfWeek dayOfWeek){
+        return dayOfWeekRepository.save(dayOfWeek);
     }
 
     public Optional<DayOfWeek> findById(Long id){

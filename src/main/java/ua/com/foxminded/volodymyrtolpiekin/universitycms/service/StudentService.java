@@ -18,9 +18,8 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
-    public Optional<Student> addStudent(Student student){
-        studentRepository.save(student);
-        return findById(student.getId());
+    public Student addStudent(Student student){
+        return studentRepository.save(student);
     }
 
     public Optional<Student> findById(Long id){

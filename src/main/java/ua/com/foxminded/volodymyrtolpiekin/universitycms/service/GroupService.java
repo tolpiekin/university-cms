@@ -18,9 +18,8 @@ public class GroupService {
         this.groupRepository = groupRepository;
     }
 
-    public Optional<Group> addGroup(Group group){
-        groupRepository.save(group);
-        return groupRepository.findById(group.getId());
+    public Group addGroup(Group group){
+        return groupRepository.save(group);
     }
 
     public Optional<Group> findById(Long id){

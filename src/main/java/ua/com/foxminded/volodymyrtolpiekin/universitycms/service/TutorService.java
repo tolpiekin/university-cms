@@ -18,9 +18,8 @@ public class TutorService {
         this.tutorRepository = tutorRepository;
     }
 
-    public Optional<Tutor> addTutor(Tutor tutor){
-        tutorRepository.save(tutor);
-        return tutorRepository.findById(tutor.getId());
+    public Tutor addTutor(Tutor tutor){
+        return tutorRepository.save(tutor);
     }
 
     public Optional<Tutor> findById(Long id){

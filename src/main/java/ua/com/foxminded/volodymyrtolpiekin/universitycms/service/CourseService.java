@@ -17,9 +17,8 @@ public class CourseService {
         this.courseRepository = courseRepository;
     }
 
-    public Optional<Course> addCourse(Course course){
-        courseRepository.save(course);
-        return courseRepository.findById(course.getId());
+    public Course addCourse(Course course){
+        return courseRepository.save(course);
     }
 
     public Optional<Course> findById(Long id){

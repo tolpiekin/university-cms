@@ -18,9 +18,8 @@ public class TopicService {
         this.topicRepository = topicRepository;
     }
 
-    public Optional<Topic> addTopic(Topic topic){
-        topicRepository.save(topic);
-        return topicRepository.findById(topic.getId());
+    public Topic addTopic(Topic topic){
+        return topicRepository.save(topic);
     }
 
     public Optional<Topic> findById(Long id){
