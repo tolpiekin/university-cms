@@ -36,12 +36,8 @@ public class GroupService {
     }
 
     public void deleteById(Long id){
-        try {
-            Optional.of(findById(id)).orElseThrow(()->new GroupNotFoundException(id));
-        }
-        catch (GroupNotFoundException exc) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group Not Found", exc);
-        }
+        Optional.of(findById(id)).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Group Not Found"));
         groupRepository.deleteById(id);
     }
 }

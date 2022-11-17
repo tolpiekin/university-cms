@@ -36,12 +36,8 @@ public class StudentService {
     }
 
     public void deleteById(Long id){
-        try {
-            Optional.of(studentRepository.findById(id)).orElseThrow(()->new StudentNotFoundException(id));
-        }
-        catch (StudentNotFoundException exc) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student Not Found", exc);
-        }
+        Optional.of(studentRepository.findById(id)).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Student Not Found"));
         studentRepository.deleteById(id);
     }
 }

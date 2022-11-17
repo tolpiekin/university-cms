@@ -37,12 +37,8 @@ public class TimetableService {
     }
 
     public void deleteById(Long id){
-        try {
-            Optional.of(timetableRepository.findById(id)).orElseThrow(()->new TimetableNotFoundException(id));
-        }
-        catch (TimetableNotFoundException exc) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Timetable Not Found", exc);
-        }
+        Optional.of(timetableRepository.findById(id)).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Timetable Not Found"));
         timetableRepository.deleteById(id);
     }
 }

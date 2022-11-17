@@ -37,12 +37,8 @@ public class DayOfWeekService {
     }
 
     public void deleteById(Long id){
-        try {
-            Optional.of(findById(id)).orElseThrow(()->new DayOfWeekNotFoundException(id));
-        }
-        catch(DayOfWeekNotFoundException exc) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "DayOfWeek Not Found", exc);
-        }
+        Optional.of(findById(id)).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "DayOfWeek Not Found"));
         dayOfWeekRepository.deleteById(id);
     }
 }

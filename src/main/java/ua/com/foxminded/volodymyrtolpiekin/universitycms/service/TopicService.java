@@ -36,12 +36,8 @@ public class TopicService {
     }
 
     public void deleteById(Long id){
-        try {
-            Optional.of(topicRepository.findById(id)).orElseThrow(()->new TopicNotFoundException(id));
-        }
-        catch (TopicNotFoundException exc) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Topic Not Found", exc);
-        }
+        Optional.of(topicRepository.findById(id)).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Topic Not Found"));
         topicRepository.deleteById(id);
     }
 }

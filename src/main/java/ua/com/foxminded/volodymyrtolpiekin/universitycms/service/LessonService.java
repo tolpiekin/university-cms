@@ -36,12 +36,8 @@ public class LessonService {
     }
 
     public void deleteById(Long id){
-        try {
-            Optional.of(lessonRepository.findById(id)).orElseThrow(()->new LessonNotFoundException(id));
-        }
-        catch (LessonNotFoundException exc) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lesson Not Found", exc);
-        }
+        Optional.of(lessonRepository.findById(id)).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Lesson Not Found"));
         lessonRepository.deleteById(id);
     }
 }

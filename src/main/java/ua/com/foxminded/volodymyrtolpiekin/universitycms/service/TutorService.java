@@ -36,11 +36,8 @@ public class TutorService {
     }
 
     public void deleteById(Long id){
-        try {
-            Optional.of(tutorRepository.findById(id)).orElseThrow(()->new TutorNotFoundException(id));
-        }
-        catch (TutorNotFoundException exc) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tutor Not Found", exc);
-        }
+        Optional.of(tutorRepository.findById(id)).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Tutor Not Found"));
+        tutorRepository.deleteById(id);
     }
 }

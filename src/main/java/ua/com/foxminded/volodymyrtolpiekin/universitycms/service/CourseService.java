@@ -36,12 +36,8 @@ public class CourseService {
     }
 
     public void deleteById(Long id){
-        try{
-            Optional.of(findById(id)).orElseThrow(()-> new CourseNotFoundException(id));
-        }
-        catch (CourseNotFoundException exc) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Course Not Found", exc);
-        }
+        Optional.of(findById(id)).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Course Not Found"));
         courseRepository.deleteById(id);
     }
 }
