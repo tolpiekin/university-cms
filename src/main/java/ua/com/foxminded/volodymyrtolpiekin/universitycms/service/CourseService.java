@@ -6,6 +6,7 @@ import org.springframework.web.server.ResponseStatusException;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Course;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.CourseRepository;
 
+import javax.xml.ws.Response;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,12 +23,8 @@ public class CourseService {
     }
 
     public Optional<Course> findById(Long id){
-        try {
-            return Optional.of(courseRepository.findById(id)).orElseThrow(()->new CourseNotFoundException(id));
-        }
-        catch (CourseNotFoundException exc) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Course Not Found", exc);
-        }
+        return Optional.of(courseRepository.findById(id)).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND,"Course not found"));
     }
 
     public List<Course> findAll(){

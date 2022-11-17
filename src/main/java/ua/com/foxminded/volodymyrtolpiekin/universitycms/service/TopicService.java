@@ -23,12 +23,8 @@ public class TopicService {
     }
 
     public Optional<Topic> findById(Long id){
-        try {
-            return Optional.of(topicRepository.findById(id)).orElseThrow(()->new TopicNotFoundException(id));
-        }
-        catch (TopicNotFoundException exc) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Topic Not Found", exc);
-        }
+        return Optional.of(topicRepository.findById(id)).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Topic Not Found"));
     }
 
     public List<Topic> findAll(){

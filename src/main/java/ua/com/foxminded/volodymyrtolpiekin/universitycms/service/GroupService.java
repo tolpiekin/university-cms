@@ -23,12 +23,8 @@ public class GroupService {
     }
 
     public Optional<Group> findById(Long id){
-        try {
-            return Optional.of(groupRepository.findById(id)).orElseThrow(()->new GroupNotFoundException(id));
-        }
-        catch (GroupNotFoundException exc) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Group Not Found", exc);
-        }
+        return Optional.of(groupRepository.findById(id)).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Group Not Found"));
     }
 
     public List<Group> findAll(){

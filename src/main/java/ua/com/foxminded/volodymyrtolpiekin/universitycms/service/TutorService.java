@@ -23,12 +23,8 @@ public class TutorService {
     }
 
     public Optional<Tutor> findById(Long id){
-        try {
-            return Optional.of(tutorRepository.findById(id)).orElseThrow(()->new TutorNotFoundException(id));
-        }
-        catch (TutorNotFoundException exc) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tutor Not Found", exc);
-        }
+        return Optional.of(tutorRepository.findById(id)).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Tutor Not Found"));
     }
 
     public List<Tutor> findAll(){

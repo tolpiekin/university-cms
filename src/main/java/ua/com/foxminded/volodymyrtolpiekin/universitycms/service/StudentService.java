@@ -23,12 +23,8 @@ public class StudentService {
     }
 
     public Optional<Student> findById(Long id){
-        try {
-            return Optional.of(studentRepository.findById(id)).orElseThrow(()->new StudentNotFoundException(id));
-        }
-        catch (StudentNotFoundException exc) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student Not Found", exc);
-        }
+        return Optional.of(studentRepository.findById(id)).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Student Not Found"));
     }
 
     public List<Student> findAll(){

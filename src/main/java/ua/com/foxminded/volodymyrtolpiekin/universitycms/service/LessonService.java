@@ -23,12 +23,8 @@ public class LessonService {
     }
 
     public Optional<Lesson> findById(Long id){
-        try {
-            return Optional.of(lessonRepository.findById(id)).orElseThrow(()->new LessonNotFoundException(id));
-        }
-        catch (LessonNotFoundException exc) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lesson Not Found", exc);
-        }
+        return Optional.of(lessonRepository.findById(id)).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Lesson Not Found"));
     }
 
     public List<Lesson> findAll(){
