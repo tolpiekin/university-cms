@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.web.server.ResponseStatusException;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.*;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.*;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.*;
@@ -79,6 +80,17 @@ class UniversityCmsApplicationTests {
 	}
 
 	@Test
+	@DisplayName("Test findStudentById Not Found")
+	void testFindStudentByIdNotFound() {
+		doReturn(Optional.empty()).when(studentRepository).findById(1l);
+
+		ResponseStatusException responseStatusException = Assertions.assertThrows(ResponseStatusException.class,
+				() -> studentService.findById(1l));
+
+		Assertions.assertEquals("404 NOT_FOUND \"Student Not Found\"", responseStatusException.getMessage());
+	}
+
+	@Test
 	@DisplayName("Test getAllStudents")
 	void testGetAllStudent() {
 		Group group = new Group();
@@ -127,6 +139,17 @@ class UniversityCmsApplicationTests {
 		Course returnedCourse = courseService.findById(1l);
 		Assertions.assertNotNull(returnedCourse, "Course was found");
 		Assertions.assertSame(returnedCourse, course, "The course returned was not the same as the mock");
+	}
+
+	@Test
+	@DisplayName("Test findCourseById Not Found")
+	void testFindCourseByIdNotFound() {
+		doReturn(Optional.empty()).when(courseRepository).findById(1l);
+
+		ResponseStatusException responseStatusException = Assertions.assertThrows(ResponseStatusException.class,
+				() -> courseService.findById(1l));
+
+		Assertions.assertEquals("404 NOT_FOUND \"Course not found\"", responseStatusException.getMessage());
 	}
 
 	@Test
@@ -182,6 +205,17 @@ class UniversityCmsApplicationTests {
 		DayOfWeek returnedDayOfWeek = dayOfWeekService.findById(1l);
 		Assertions.assertNotNull(returnedDayOfWeek, "DayOfWeek was found");
 		Assertions.assertSame(returnedDayOfWeek, dayOfWeek, "The dayOfWeek returned was not the same as the mock");
+	}
+
+	@Test
+	@DisplayName("Test findDayOfWeekById Not Found")
+	void testFindDayOfWeekByIdNotFound() {
+		doReturn(Optional.empty()).when(dayOfWeekRepository).findById(1l);
+
+		ResponseStatusException responseStatusException = Assertions.assertThrows(ResponseStatusException.class,
+				() -> dayOfWeekService.findById(1l));
+
+		Assertions.assertEquals("404 NOT_FOUND \"DayOfWeek not found\"", responseStatusException.getMessage());
 	}
 
 	@Test
