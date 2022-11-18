@@ -31,6 +31,12 @@ class UniversityCmsApplicationTests {
 	StudentService studentService;
 
 	@Autowired
+	GroupService groupService;
+
+	@Autowired
+	LessonService lessonService;
+
+	@Autowired
 	TimetableService timetableService;
 
 	@Autowired
@@ -244,5 +250,269 @@ class UniversityCmsApplicationTests {
 		DayOfWeek returnedDayOfWeek = dayOfWeekService.addDayOfWeek(dayOfWeek);
 		Assertions.assertNotNull(returnedDayOfWeek, "The saved dayOfWeek should not be null");
 		Assertions.assertEquals(returnedDayOfWeek, dayOfWeek, "Should be the same dayOfWeek");
+	}
+
+	@Test
+	@DisplayName("Test findGroupById Success")
+	void testFindGroupById() {
+
+		Group group = new Group();
+		group.setId(1l);
+		group.setName("First group");
+
+		doReturn(Optional.of(group)).when(groupRepository).findById(1l);
+		Group returnedGroup = groupService.findById(1l);
+		Assertions.assertNotNull(returnedGroup, "Group was found");
+		Assertions.assertSame(returnedGroup, group, "The group returned was not the same as the mock");
+	}
+
+	@Test
+	@DisplayName("Test findGroupById Not Found")
+	void testFindGroupByIdNotFound() {
+		doReturn(Optional.empty()).when(groupRepository).findById(1l);
+
+		ResponseStatusException responseStatusException = Assertions.assertThrows(ResponseStatusException.class,
+				() -> groupService.findById(1l));
+
+		Assertions.assertEquals("404 NOT_FOUND \"Group Not Found\"", responseStatusException.getMessage());
+	}
+
+	@Test
+	@DisplayName("Test getAllGroups")
+	void testGetAllGroups() {
+
+		Group group1 = new Group();
+		group1.setId(1l);
+		group1.setName("First group");
+
+		Group group2 = new Group();
+		group2.setId(2l);
+		group2.setName("Second group");
+
+		doReturn(Arrays.asList(group1, group2)).when(groupRepository).findAll();
+		List<Group> groups = groupService.findAll();
+		Assertions.assertEquals(2, groups.size(), "getAll should return 2 groups");
+	}
+
+	@Test
+	@DisplayName("Test add group")
+	void testAddGroup() {
+
+		Group group = new Group();
+		group.setId(1l);
+		group.setName("First group");
+
+		doReturn(group).when(groupRepository).save(group);
+		Group returnedGroup = groupService.addGroup(group);
+		Assertions.assertNotNull(returnedGroup, "The saved group should not be null");
+		Assertions.assertEquals(returnedGroup, group, "Should be the same group");
+	}
+
+	@Test
+	@DisplayName("Test findLessonById Success")
+	void testFindLessonById() {
+
+		Lesson lesson = new Lesson();
+		lesson.setId(1l);
+
+		doReturn(Optional.of(lesson)).when(lessonRepository).findById(1l);
+		Lesson returnedLesson = lessonService.findById(1l);
+		Assertions.assertNotNull(returnedLesson, "Lesson was found");
+		Assertions.assertSame(returnedLesson, lesson, "The lesson returned was not the same as the mock");
+	}
+
+	@Test
+	@DisplayName("Test findLessonById Not Found")
+	void testFindLessonByIdNotFound() {
+		doReturn(Optional.empty()).when(lessonRepository).findById(1l);
+
+		ResponseStatusException responseStatusException = Assertions.assertThrows(ResponseStatusException.class,
+				() -> lessonService.findById(1l));
+
+		Assertions.assertEquals("404 NOT_FOUND \"Lesson Not Found\"", responseStatusException.getMessage());
+	}
+
+	@Test
+	@DisplayName("Test getAllLessons")
+	void testGetAllLessons() {
+
+		Lesson lesson1 = new Lesson();
+		lesson1.setId(1l);
+
+		Lesson lesson2 = new Lesson();
+		lesson2.setId(2l);
+
+		doReturn(Arrays.asList(lesson1, lesson2)).when(lessonRepository).findAll();
+		List<Lesson> lessons = lessonService.findAll();
+		Assertions.assertEquals(2, lessons.size(), "getAll should return 2 lessons");
+	}
+
+	@Test
+	@DisplayName("Test add lesson")
+	void testAddLesson() {
+
+		Lesson lesson = new Lesson();
+		lesson.setId(1l);
+
+		doReturn(lesson).when(lessonRepository).save(lesson);
+		Lesson returnedLesson = lessonService.addLesson(lesson);
+		Assertions.assertNotNull(returnedLesson, "The saved lesson should not be null");
+		Assertions.assertEquals(returnedLesson, lesson, "Should be the same lesson");
+	}
+
+	@Test
+	@DisplayName("Test findTimetableById Success")
+	void testFindTimetableById() {
+
+		Timetable timetable = new Timetable();
+		timetable.setId(1l);
+
+		doReturn(Optional.of(timetable)).when(timetableRepository).findById(1l);
+		Timetable returnedTimetable = timetableService.findById(1l);
+		Assertions.assertNotNull(returnedTimetable, "Timetable was found");
+		Assertions.assertSame(returnedTimetable, timetable, "The timetable returned was not the same as the mock");
+	}
+
+	@Test
+	@DisplayName("Test findTimetableById Not Found")
+	void testFindTimetableByIdNotFound() {
+		doReturn(Optional.empty()).when(timetableRepository).findById(1l);
+
+		ResponseStatusException responseStatusException = Assertions.assertThrows(ResponseStatusException.class,
+				() -> timetableService.findById(1l));
+
+		Assertions.assertEquals("404 NOT_FOUND \"Timetable Not Found\"", responseStatusException.getMessage());
+	}
+
+	@Test
+	@DisplayName("Test getAllTimetables")
+	void testGetAllTimetables() {
+
+		Timetable timetable1 = new Timetable();
+		timetable1.setId(1l);
+
+		Timetable timetable2 = new Timetable();
+		timetable2.setId(2l);
+
+		doReturn(Arrays.asList(timetable1, timetable2)).when(timetableRepository).findAll();
+		List<Timetable> timetables = timetableService.findAll();
+		Assertions.assertEquals(2, timetables.size(), "getAll should return 2 timetables");
+	}
+
+	@Test
+	@DisplayName("Test add timetable")
+	void testAddTimetable() {
+
+		Timetable timetable = new Timetable();
+		timetable.setId(1l);
+
+		doReturn(timetable).when(timetableRepository).save(timetable);
+		Timetable returnedTimetable = timetableService.addTimetable(timetable);
+		Assertions.assertNotNull(returnedTimetable, "The saved timetable should not be null");
+		Assertions.assertEquals(returnedTimetable, timetable, "Should be the same timetable");
+	}
+
+	@Test
+	@DisplayName("Test findTopicById Success")
+	void testFindTopicById() {
+
+		Topic topic = new Topic();
+		topic.setId(1l);
+
+		doReturn(Optional.of(topic)).when(topicRepository).findById(1l);
+		Topic returnedTopic = topicService.findById(1l);
+		Assertions.assertNotNull(returnedTopic, "Topic was found");
+		Assertions.assertSame(returnedTopic, topic, "The topic returned was not the same as the mock");
+	}
+
+	@Test
+	@DisplayName("Test findTopicById Not Found")
+	void testFindTopicByIdNotFound() {
+		doReturn(Optional.empty()).when(topicRepository).findById(1l);
+
+		ResponseStatusException responseStatusException = Assertions.assertThrows(ResponseStatusException.class,
+				() -> topicService.findById(1l));
+
+		Assertions.assertEquals("404 NOT_FOUND \"Topic Not Found\"", responseStatusException.getMessage());
+	}
+
+	@Test
+	@DisplayName("Test getAllTopics")
+	void testGetAllTopics() {
+
+		Topic topic1 = new Topic();
+		topic1.setId(1l);
+
+		Topic topic2 = new Topic();
+		topic2.setId(2l);
+
+		doReturn(Arrays.asList(topic1, topic2)).when(topicRepository).findAll();
+		List<Topic> topics = topicService.findAll();
+		Assertions.assertEquals(2, topics.size(), "getAll should return 2 topics");
+	}
+
+	@Test
+	@DisplayName("Test add topic")
+	void testAddTopic() {
+
+		Topic topic = new Topic();
+		topic.setId(1l);
+
+		doReturn(topic).when(topicRepository).save(topic);
+		Topic returnedTopic = topicService.addTopic(topic);
+		Assertions.assertNotNull(returnedTopic, "The saved topic should not be null");
+		Assertions.assertEquals(returnedTopic, topic, "Should be the same topic");
+	}
+
+	@Test
+	@DisplayName("Test findTutorById Success")
+	void testFindTutorById() {
+
+		Tutor tutor = new Tutor();
+		tutor.setId(1l);
+
+		doReturn(Optional.of(tutor)).when(tutorRepository).findById(1l);
+		Tutor returnedTutor = tutorService.findById(1l);
+		Assertions.assertNotNull(returnedTutor, "Tutor was found");
+		Assertions.assertSame(returnedTutor, tutor, "The tutor returned was not the same as the mock");
+	}
+
+	@Test
+	@DisplayName("Test findTutorById Not Found")
+	void testFindTutorByIdNotFound() {
+		doReturn(Optional.empty()).when(tutorRepository).findById(1l);
+
+		ResponseStatusException responseStatusException = Assertions.assertThrows(ResponseStatusException.class,
+				() -> tutorService.findById(1l));
+
+		Assertions.assertEquals("404 NOT_FOUND \"Tutor Not Found\"", responseStatusException.getMessage());
+	}
+
+	@Test
+	@DisplayName("Test getAllTutors")
+	void testGetAllTutors() {
+
+		Tutor tutor1 = new Tutor();
+		tutor1.setId(1l);
+
+		Tutor tutor2 = new Tutor();
+		tutor2.setId(2l);
+
+		doReturn(Arrays.asList(tutor1, tutor2)).when(tutorRepository).findAll();
+		List<Tutor> tutors = tutorService.findAll();
+		Assertions.assertEquals(2, tutors.size(), "getAll should return 2 tutors");
+	}
+
+	@Test
+	@DisplayName("Test add tutor")
+	void testAddTutor() {
+
+		Tutor tutor = new Tutor();
+		tutor.setId(1l);
+
+		doReturn(tutor).when(tutorRepository).save(tutor);
+		Tutor returnedTutor = tutorService.addTutor(tutor);
+		Assertions.assertNotNull(returnedTutor, "The saved tutor should not be null");
+		Assertions.assertEquals(returnedTutor, tutor, "Should be the same tutor");
 	}
 }
