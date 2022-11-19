@@ -19,31 +19,6 @@ public class Timetable {
     public Timetable() {
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Timetable timeTable = (Timetable) o;
-        return id.equals(timeTable.id);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = 17;
-        result = 37 * result + (id == null ? 0 : id.hashCode());
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "TimeTable{" +
-                "id=" + id +
-                ", start=" + validFrom +
-                ", end=" + validTill +
-                ", days=" + days +
-                '}';
-    }
-
     public Long getId() {
         return id;
     }
@@ -75,4 +50,30 @@ public class Timetable {
     public void setDays(List<DayOfWeek> days) {
         this.days = days;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Timetable timeTable = (Timetable) o;
+        return id.equals(timeTable.id);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 37 * result + (id == null ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "TimeTable{" +
+                "id=" + id +
+                ", start=" + validFrom +
+                ", end=" + validTill +
+                ", days=" + days +
+                '}';
+    }
+
 }

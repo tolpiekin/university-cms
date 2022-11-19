@@ -21,30 +21,6 @@ public class DayOfWeek {
     public DayOfWeek() {
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DayOfWeek dayOfWeek = (DayOfWeek) o;
-        return id.equals(dayOfWeek.id);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = 17;
-        result = 37 * result + (id == null ? 0 : id.hashCode());
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "DayOfWeek{" +
-                "id=" + id +
-                ", date=" + date +
-                ", lessons=" + lessons +
-                '}';
-    }
-
     public Long getId() {
         return id;
     }
@@ -75,5 +51,37 @@ public class DayOfWeek {
 
     public void setTimeTable(Timetable timetable) {
         this.timetable = timetable;
+    }
+
+    public Timetable getTimetable() {
+        return timetable;
+    }
+
+    public void setTimetable(Timetable timetable) {
+        this.timetable = timetable;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DayOfWeek dayOfWeek = (DayOfWeek) o;
+        return id.equals(dayOfWeek.id);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 37 * result + (id == null ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "DayOfWeek{" +
+                "id=" + id +
+                ", date=" + date +
+                ", lessons=" + lessons +
+                '}';
     }
 }

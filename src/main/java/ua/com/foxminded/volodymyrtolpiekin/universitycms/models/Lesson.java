@@ -31,34 +31,6 @@ public class Lesson {
     public Lesson() {
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Lesson lesson = (Lesson) o;
-        return id.equals(lesson.id);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = 17;
-        result = 37 * result + (id == null ? 0 : id.hashCode());
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Lesson{" +
-                "id=" + id +
-                ", start=" + start +
-                ", location='" + location + '\'' +
-                ", hours=" + hours +
-                ", group=" + group +
-                ", course=" + course +
-                ", tutor=" + tutor +
-                '}';
-    }
-
     public Long getId() {
         return id;
     }
@@ -113,5 +85,41 @@ public class Lesson {
 
     public void setTutor(Tutor tutor) {
         this.tutor = tutor;
+    }
+
+    public DayOfWeek getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public void setDayOfWeek(DayOfWeek dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lesson lesson = (Lesson) o;
+        return id.equals(lesson.id);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 37 * result + (id == null ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Lesson{" +
+                "id=" + id +
+                ", start=" + start +
+                ", location='" + location + '\'' +
+                ", hours=" + hours +
+                ", group=" + group +
+                ", course=" + course +
+                ", tutor=" + tutor +
+                '}';
     }
 }

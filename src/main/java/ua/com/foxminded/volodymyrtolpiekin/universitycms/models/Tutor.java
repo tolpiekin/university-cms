@@ -17,6 +17,22 @@ public class Tutor extends Person {
     public Tutor() {
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -39,21 +55,5 @@ public class Tutor extends Person {
                 "id=" + id +
                 ", courses=" + courses +
                 '}';
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public List<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
     }
 }

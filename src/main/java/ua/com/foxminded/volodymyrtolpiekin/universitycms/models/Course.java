@@ -27,30 +27,6 @@ public class Course {
     public Course() {
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Course course = (Course) o;
-        return id.equals(course.id);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = 17;
-        result = 37 * result + (id == null ? 0 : id.hashCode());
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Course{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", topics=" + topics +
-                '}';
-    }
-
     public Long getId() {
         return id;
     }
@@ -97,5 +73,29 @@ public class Course {
 
     public void setLessons(List<Lesson> lessons) {
         this.lessons = lessons;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return id.equals(course.id);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 37 * result + (id == null ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", topics=" + topics +
+                '}';
     }
 }
