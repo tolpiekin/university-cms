@@ -1,41 +1,17 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.service;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Student;
-import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.StudentRepository;
 
 import java.util.List;
 
-@Service
-public class StudentService {
+public interface StudentService {
+    Student addStudent(Student student);
 
-    private final StudentRepository studentRepository;
+    Student findById(Long id);
 
-    public StudentService(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
-    }
+    List<Student> findAll();
 
-    public Student addStudent(Student student){
-        return studentRepository.save(student);
-    }
+    Student update(Student student);
 
-    public Student findById(Long id){
-        return studentRepository.findById(id).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Student Not Found"));
-    }
-
-    public List<Student> findAll(){
-        return studentRepository.findAll();
-    }
-
-    public Student update(Student student){
-        return studentRepository.save(student);
-    }
-
-    public void deleteById(Long id){
-        findById(id);
-        studentRepository.deleteById(id);
-    }
+    void deleteById(Long id);
 }

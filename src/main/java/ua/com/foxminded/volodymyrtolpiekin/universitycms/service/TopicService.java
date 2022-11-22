@@ -1,41 +1,17 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.service;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Topic;
-import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.TopicRepository;
 
 import java.util.List;
 
-@Service
-public class TopicService {
+public interface TopicService {
+    Topic addTopic(Topic topic);
 
-    private final TopicRepository topicRepository;
+    Topic findById(Long id);
 
-    public TopicService(TopicRepository topicRepository) {
-        this.topicRepository = topicRepository;
-    }
+    List<Topic> findAll();
 
-    public Topic addTopic(Topic topic){
-        return topicRepository.save(topic);
-    }
+    Topic update(Topic topic);
 
-    public Topic findById(Long id){
-        return topicRepository.findById(id).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Topic Not Found"));
-    }
-
-    public List<Topic> findAll(){
-        return topicRepository.findAll();
-    }
-
-    public Topic update(Topic topic){
-        return topicRepository.save(topic);
-    }
-
-    public void deleteById(Long id){
-        findById(id);
-        topicRepository.deleteById(id);
-    }
+    void deleteById(Long id);
 }

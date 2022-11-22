@@ -1,41 +1,17 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.service;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Group;
-import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.GroupRepository;
 
 import java.util.List;
 
-@Service
-public class GroupService {
+public interface GroupService {
+    Group addGroup(Group group);
 
-    private final GroupRepository groupRepository;
+    Group findById(Long id);
 
-    public GroupService(GroupRepository groupRepository) {
-        this.groupRepository = groupRepository;
-    }
+    List<Group> findAll();
 
-    public Group addGroup(Group group){
-        return groupRepository.save(group);
-    }
+    Group update(Group group);
 
-    public Group findById(Long id){
-        return groupRepository.findById(id).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Group Not Found"));
-    }
-
-    public List<Group> findAll(){
-        return groupRepository.findAll();
-    }
-
-    public Group update(Group group){
-        return groupRepository.save(group);
-    }
-
-    public void deleteById(Long id){
-        findById(id);
-        groupRepository.deleteById(id);
-    }
+    void deleteById(Long id);
 }

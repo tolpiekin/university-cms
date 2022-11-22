@@ -36,7 +36,7 @@ class UniversityCmsApplicationTests {
 	LessonService lessonService;
 
 	@Autowired
-	TimetableServiceImpl timetableServiceImpl;
+	TimetableService timetableService;
 
 	@Autowired
 	TopicService topicService;
@@ -367,7 +367,7 @@ class UniversityCmsApplicationTests {
 		timetable.setId(1L);
 
 		doReturn(Optional.of(timetable)).when(timetableRepository).findById(1L);
-		Timetable returnedTimetable = timetableServiceImpl.findById(1L);
+		Timetable returnedTimetable = timetableService.findById(1L);
 		Assertions.assertNotNull(returnedTimetable, "Timetable was found");
 		Assertions.assertSame(returnedTimetable, timetable, "The timetable returned was not the same as the mock");
 	}
@@ -378,7 +378,7 @@ class UniversityCmsApplicationTests {
 		doReturn(Optional.empty()).when(timetableRepository).findById(1L);
 
 		ResponseStatusException responseStatusException = Assertions.assertThrows(ResponseStatusException.class,
-				() -> timetableServiceImpl.findById(1L));
+				() -> timetableService.findById(1L));
 
 		Assertions.assertEquals("404 NOT_FOUND \"Timetable Not Found\"", responseStatusException.getMessage());
 	}
@@ -394,7 +394,7 @@ class UniversityCmsApplicationTests {
 		timetable2.setId(2L);
 
 		doReturn(Arrays.asList(timetable1, timetable2)).when(timetableRepository).findAll();
-		List<Timetable> timetables = timetableServiceImpl.findAll();
+		List<Timetable> timetables = timetableService.findAll();
 		Assertions.assertEquals(2, timetables.size(), "getAll should return 2 timetables");
 	}
 
@@ -406,7 +406,7 @@ class UniversityCmsApplicationTests {
 		timetable.setId(1L);
 
 		doReturn(timetable).when(timetableRepository).save(timetable);
-		Timetable returnedTimetable = timetableServiceImpl.addTimetable(timetable);
+		Timetable returnedTimetable = timetableService.addTimetable(timetable);
 		Assertions.assertNotNull(returnedTimetable, "The saved timetable should not be null");
 		Assertions.assertEquals(returnedTimetable, timetable, "Should be the same timetable");
 	}
