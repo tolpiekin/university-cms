@@ -1,0 +1,20 @@
+<div th:switch="${tutors}">
+    <h2 th:case="null">No tutors yet!</h2>
+    <div th:case="*">
+        <h2>Tutors</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="tutor : ${tutors}">
+                <td th:text="${tutor.id}"></td>
+                <td th:text="${tutor.name}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

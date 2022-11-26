@@ -1,0 +1,20 @@
+<div th:switch="${daysofweek}">
+    <h2 th:case="null">No Days Of Week yet!</h2>
+    <div th:case="*">
+        <h2>Days Of Week</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="dayofweek : ${daysofweek}">
+                <td th:text="${dayofweek.id}"></td>
+                <td th:text="${dayofweek.date}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

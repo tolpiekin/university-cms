@@ -1,0 +1,22 @@
+<div th:switch="${timetables}">
+    <h2 th:case="null">No timetables yet!</h2>
+    <div th:case="*">
+        <h2>Timetables</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>From</th>
+                <th>Till</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="timetable : ${timetables}">
+                <td th:text="${timetable.id}"></td>
+                <td th:text="${timetable.validFrom}"></td>
+                <td th:text="${timetable.validTill}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
