@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeConroller {
 
     @Value("${spring.application.name}")
-    String appName;
+    private String appName;
 
     @GetMapping("/")
     public String homePage(Model model) {
