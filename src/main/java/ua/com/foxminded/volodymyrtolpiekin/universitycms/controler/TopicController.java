@@ -1,6 +1,5 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.controler;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,9 +7,11 @@ import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.TopicReposit
 
 @Controller
 public class TopicController {
+    private final TopicRepository topicRepository;
 
-    @Autowired
-    TopicRepository topicRepository;
+    public TopicController(TopicRepository topicRepository) {
+        this.topicRepository = topicRepository;
+    }
 
     @GetMapping("/topics")
     public String showTopicsList(Model model) {
