@@ -1,14 +1,20 @@
-# Task 3.3 Create basic UI
+# Task 3.4 Adding Security
+
 **Assignment**:
-1. [Add Bootstrap](https://www.baeldung.com/spring-boot-start) js/css support to your project (webjars recommended)
+1. Review your user/roles model, and ask your mentor for clarifications regarding your security model. For example, you can add ADMIN, STUDENT, TEACHER, and STUFF roles.
+2. Use basic security for user authentication.
 
-2. Add basic data generation or migration script to populate your db with sample data
+3. Create an admin panel for assigning a new user's role and create services that help the admin manage users.
 
-3. Create welcome page and controller with menu with main entities from your model
+4. add required changes with login/logout functionality and logged-in user information to UI
 
-**Important** use thymeleaf templates and reusable fragments
+Example:
 
-4. Create pages with tables to list content from DB for each Entity and link those pages from main menu
+User administration flow
 
-5. Cover controllers with [Spring MVC tests](https://www.baeldung.com/spring-boot-testing#unit-testing-with-webmvctest)
-
+Given User `A` logged in with Admin role
+- User 'A' should be able to navigate to admin panel
+- User without admin role should not have access to user admin panel
+- User 'A' should be able to list all registered users on user admin page
+- User 'A' should be able to set required role for each registered user
+  ... etc
