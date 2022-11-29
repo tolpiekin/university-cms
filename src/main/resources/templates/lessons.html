@@ -1,0 +1,24 @@
+<div th:switch="${lessons}">
+    <h2 th:case="null">No lessons yet!</h2>
+    <div th:case="*">
+        <h2>Lessons</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Start</th>
+                <th>Location</th>
+                <th>Duration</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="lesson : ${lessons}">
+                <td th:text="${lesson.id}"></td>
+                <td th:text="${lesson.start}"></td>
+                <td th:text="${lesson.location}"></td>
+                <td th:text="${lesson.hours}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

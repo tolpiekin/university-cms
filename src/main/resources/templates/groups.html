@@ -1,0 +1,20 @@
+<div th:switch="${groups}">
+    <h2 th:case="null">No groups yet!</h2>
+    <div th:case="*">
+        <h2>Groups</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="group : ${groups}">
+                <td th:text="${group.id}"></td>
+                <td th:text="${group.name}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
