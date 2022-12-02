@@ -1,6 +1,7 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.controler;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
@@ -26,8 +27,13 @@ public class MainController {
         return "secured part of web service: " + principal.getName();
     }
 
+    @GetMapping("/read_profile")
+    public String pageForReadProfile() {
+        return "read profile page";
+    }
+
     @GetMapping("/admin")
-    public String pageForAdmins(Principal principal) {
+    public String pageOnlyForAdmins(Principal principal) {
         return "admin page for admin: " + principal.getName();
     }
 }
