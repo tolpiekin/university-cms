@@ -1,17 +1,25 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.controler;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.User;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.UserService;
 
 import java.security.Principal;
 
-@RestController
+@Controller
 public class MainController {
+    private UserService userService;
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     @Value("${spring.application.name}")
     private String appName;
@@ -23,17 +31,18 @@ public class MainController {
     }
 
     @GetMapping("/authenticated")
-    public String pageForAuthenticatedUsers(Principal principal) {
-        return "secured part of web service: " + principal.getName();
+    public @ResponseBody String pageForAuthenticatedUsers(Principal principal) {
+        User user = userService.findByUsername(principal.getName());
+        return String.format("secured part of web service: %s, email: %s", user.getUsername(), user.getEmail());
     }
 
     @GetMapping("/read_profile")
-    public String pageForReadProfile() {
+    public @ResponseBody String pageForReadProfile() {
         return "read profile page";
     }
 
     @GetMapping("/admin")
-    public String pageOnlyForAdmins(Principal principal) {
+    public @ResponseBody String pageOnlyForAdmins(Principal principal) {
         return "admin page for admin: " + principal.getName();
     }
 }

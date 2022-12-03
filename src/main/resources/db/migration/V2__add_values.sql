@@ -162,3 +162,19 @@ INSERT INTO lessons (id, hours, location, start, course_id, day_of_week_id, grou
 INSERT INTO lessons (id, hours, location, start, course_id, day_of_week_id, group_id, tutor_id) VALUES (25, 1, 'a103', '2022-09-05 08:00', 3, 3, 3, 3);
 INSERT INTO lessons (id, hours, location, start, course_id, day_of_week_id, group_id, tutor_id) VALUES (26, 1, 'a103', '2022-09-05 09:00', 1, 3, 3, 1);
 INSERT INTO lessons (id, hours, location, start, course_id, day_of_week_id, group_id, tutor_id) VALUES (27, 1, 'a103', '2022-09-05 10:00', 2, 3, 3, 2);
+
+INSERT INTO roles (name)
+values
+('ROLE_USER'), ('ROLE_ADMIN');
+
+insert into users (username, password, email)
+values
+('admin' , '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'admin@gmail.com');
+
+insert into users (username, password, email)
+values
+('user' , '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'user@gmail.com');
+
+insert into users_roles (user_id, role_id) values (1, 2);
+
+insert into users_roles (user_id, role_id) values (2, 1);
