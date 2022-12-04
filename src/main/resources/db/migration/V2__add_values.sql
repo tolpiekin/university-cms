@@ -1,3 +1,79 @@
+INSERT INTO roles (id, name)
+values
+(1, 'ROLE_ADMIN'), (2, 'ROLE_STUDENT'), (3, 'ROLE_TEACHER'), (4, 'ROLE_STUFF');
+
+insert into users (id, username, password, email)
+values
+(1, 'admin', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'admin@gmail.com'),
+(2, 'nedstark', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'nedstark@ucms.com'),
+(3, 'robertbaratheon', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'robertbaratheon@ucms.com'),
+(4, 'jonsnow', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'jonsnow@ucms.com'),
+(34, 'tormudgiantsbane', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'tormudgiantsbane@ucms.com'),
+(33, 'gendry', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'gendry@ucms.com'),
+(32, 'ygritte', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'ygritte@ucms.com'),
+(31, 'talisamaegyr', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'talisamaegyr@ucms.com'),
+(30, 'tywinlannister', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'tywinlannister@ucms.com'),
+(29, 'margaerytyrell', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'margaerytyrell@ucms.com'),
+(28, 'shae', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'shae@ucms.com'),
+(27, 'varys', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'varys@ucms.com'),
+(26, 'bronn', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'bronn@ucms.com'),
+(25, 'jearmormont', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'jearmormont@ucms.com'),
+(24, 'melisandre', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'melisandre@ucms.com'),
+(23, 'stannisbaratheon', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'stannisbaratheon@ucms.com'),
+(22, 'samwelltarly', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'samwelltarly@ucms.com'),
+(21, 'davosseaworth', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'davosseaworth@ucms.com'),
+(20, 'patyrbaelish', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'patyrbaelish@ucms.com'),
+(19, 'khaldrogo', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'khaldrogo@ucms.com'),
+(18, 'tyrionlannister', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'tyrionlannister@ucms.com'),
+(17, 'sandorclegane', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'sandorclegane@ucms.com'),
+(16, 'joffreybaratheon', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'joffreybaratheon@ucms.com'),
+(15, 'branstark', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'branstark@ucms.com'),
+(14, 'theongreyjoy', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'theongreyjoy@ucms.com'),
+(13, 'aryastark', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'aryastark@ucms.com'),
+(12, 'sansastark', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'sansastark@ucms.com'),
+(11, 'robbstark', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'robbstark@ucms.com'),
+(10, 'viserystargaryen', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'viserystargaryen@ucms.com'),
+(9, 'jorahmormont', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'jorahmormont@ucms.com'),
+(8, 'daenerystargaryen', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'daenerystargaryen@ucms.com'),
+(7, 'cerseilannister', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'cerseilannister@ucms.com'),
+(6, 'catelynstark', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'catelynstark@ucms.com'),
+(5, 'jaimelannister', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'jaimelannister@ucms.com');
+
+insert into users_roles (user_id, role_id) values (1, 1);
+insert into users_roles (user_id, role_id) values (2, 3);
+insert into users_roles (user_id, role_id) values (3, 3);
+insert into users_roles (user_id, role_id) values (4, 3);
+insert into users_roles (user_id, role_id) values (5, 2);
+insert into users_roles (user_id, role_id) values (6, 2);
+insert into users_roles (user_id, role_id) values (7, 2);
+insert into users_roles (user_id, role_id) values (8, 2);
+insert into users_roles (user_id, role_id) values (9, 2);
+insert into users_roles (user_id, role_id) values (10, 2);
+insert into users_roles (user_id, role_id) values (11, 2);
+insert into users_roles (user_id, role_id) values (12, 2);
+insert into users_roles (user_id, role_id) values (13, 2);
+insert into users_roles (user_id, role_id) values (14, 2);
+insert into users_roles (user_id, role_id) values (15, 2);
+insert into users_roles (user_id, role_id) values (16, 2);
+insert into users_roles (user_id, role_id) values (17, 2);
+insert into users_roles (user_id, role_id) values (18, 2);
+insert into users_roles (user_id, role_id) values (19, 2);
+insert into users_roles (user_id, role_id) values (20, 2);
+insert into users_roles (user_id, role_id) values (21, 2);
+insert into users_roles (user_id, role_id) values (22, 2);
+insert into users_roles (user_id, role_id) values (23, 2);
+insert into users_roles (user_id, role_id) values (24, 2);
+insert into users_roles (user_id, role_id) values (25, 2);
+insert into users_roles (user_id, role_id) values (26, 2);
+insert into users_roles (user_id, role_id) values (27, 2);
+insert into users_roles (user_id, role_id) values (28, 2);
+insert into users_roles (user_id, role_id) values (29, 2);
+insert into users_roles (user_id, role_id) values (30, 2);
+insert into users_roles (user_id, role_id) values (31, 2);
+insert into users_roles (user_id, role_id) values (32, 2);
+insert into users_roles (user_id, role_id) values (33, 2);
+insert into users_roles (user_id, role_id) values (34, 2);
+
 INSERT INTO groups (id, name) VALUES (1, 'gp1-1');
 INSERT INTO groups (id, name) VALUES (2, 'gp1-2');
 INSERT INTO groups (id, name) VALUES (3, 'gp1-3');
@@ -5,46 +81,46 @@ INSERT INTO groups (id, name) VALUES (4, 'gp2-1');
 INSERT INTO groups (id, name) VALUES (5, 'gp2-2');
 INSERT INTO groups (id, name) VALUES (6, 'gp2-3');
 
-INSERT INTO students (id, name, group_id) VALUES (1, 'Jaime Lannister', 1);
-INSERT INTO students (id, name, group_id) VALUES (2, 'Catelyn Stark', 1);
-INSERT INTO students (id, name, group_id) VALUES (3, 'Cersei Lannister', 1);
-INSERT INTO students (id, name, group_id) VALUES (4, 'Daenerys Targaryen', 1);
-INSERT INTO students (id, name, group_id) VALUES (5, 'Jorah Mormont', 1);
+INSERT INTO students (id, name, group_id, user_id) VALUES (1, 'Jaime Lannister', 1, 5);
+INSERT INTO students (id, name, group_id, user_id) VALUES (2, 'Catelyn Stark', 1, 6);
+INSERT INTO students (id, name, group_id, user_id) VALUES (3, 'Cersei Lannister', 1, 7);
+INSERT INTO students (id, name, group_id, user_id) VALUES (4, 'Daenerys Targaryen', 1, 8);
+INSERT INTO students (id, name, group_id, user_id) VALUES (5, 'Jorah Mormont', 1, 9);
 
-INSERT INTO students (id, name, group_id) VALUES (6, 'Viserys Targaryen', 2);
-INSERT INTO students (id, name, group_id) VALUES (7, 'Robb Stark', 2);
-INSERT INTO students (id, name, group_id) VALUES (8, 'Sansa Stark', 2);
-INSERT INTO students (id, name, group_id) VALUES (9, 'Arya Stark', 2);
-INSERT INTO students (id, name, group_id) VALUES (10, 'Theon Greyjoy', 2);
+INSERT INTO students (id, name, group_id, user_id) VALUES (6, 'Viserys Targaryen', 2, 10);
+INSERT INTO students (id, name, group_id, user_id) VALUES (7, 'Robb Stark', 2, 11);
+INSERT INTO students (id, name, group_id, user_id) VALUES (8, 'Sansa Stark', 2, 12);
+INSERT INTO students (id, name, group_id, user_id) VALUES (9, 'Arya Stark', 2, 13);
+INSERT INTO students (id, name, group_id, user_id) VALUES (10, 'Theon Greyjoy', 2, 14);
 
-INSERT INTO students (id, name, group_id) VALUES (11, 'Bran Stark', 3);
-INSERT INTO students (id, name, group_id) VALUES (12, 'Joffrey Baratheon', 3);
-INSERT INTO students (id, name, group_id) VALUES (13, 'Sandor "The Hound" Clegane', 3);
-INSERT INTO students (id, name, group_id) VALUES (14, 'Tyrion Lannister', 3);
-INSERT INTO students (id, name, group_id) VALUES (15, 'Khal Drogo', 3);
+INSERT INTO students (id, name, group_id, user_id) VALUES (11, 'Bran Stark', 3, 15);
+INSERT INTO students (id, name, group_id, user_id) VALUES (12, 'Joffrey Baratheon', 3, 16);
+INSERT INTO students (id, name, group_id, user_id) VALUES (13, 'Sandor "The Hound" Clegane', 3, 17);
+INSERT INTO students (id, name, group_id, user_id) VALUES (14, 'Tyrion Lannister', 3, 18);
+INSERT INTO students (id, name, group_id, user_id) VALUES (15, 'Khal Drogo', 3, 19);
 
-INSERT INTO students (id, name, group_id) VALUES (16, 'Petyr "Littlefinger" Baelish', 4);
-INSERT INTO students (id, name, group_id) VALUES (17, 'Davos Seaworth', 4);
-INSERT INTO students (id, name, group_id) VALUES (18, 'Samwell Tarly', 4);
-INSERT INTO students (id, name, group_id) VALUES (19, 'Stannis Baratheon', 4);
-INSERT INTO students (id, name, group_id) VALUES (20, 'Melisandre', 4);
+INSERT INTO students (id, name, group_id, user_id) VALUES (16, 'Petyr "Littlefinger" Baelish', 4, 20);
+INSERT INTO students (id, name, group_id, user_id) VALUES (17, 'Davos Seaworth', 4, 21);
+INSERT INTO students (id, name, group_id, user_id) VALUES (18, 'Samwell Tarly', 4, 22);
+INSERT INTO students (id, name, group_id, user_id) VALUES (19, 'Stannis Baratheon', 4, 23);
+INSERT INTO students (id, name, group_id, user_id) VALUES (20, 'Melisandre', 4, 24);
 
-INSERT INTO students (id, name, group_id) VALUES (21, 'Jeor Mormont', 5);
-INSERT INTO students (id, name, group_id) VALUES (22, 'Bronn', 5);
-INSERT INTO students (id, name, group_id) VALUES (23, 'Varys', 5);
-INSERT INTO students (id, name, group_id) VALUES (24, 'Shae', 5);
-INSERT INTO students (id, name, group_id) VALUES (25, 'Margaery Tyrell', 5);
+INSERT INTO students (id, name, group_id, user_id) VALUES (21, 'Jeor Mormont', 5, 25);
+INSERT INTO students (id, name, group_id, user_id) VALUES (22, 'Bronn', 5, 26);
+INSERT INTO students (id, name, group_id, user_id) VALUES (23, 'Varys', 5, 27);
+INSERT INTO students (id, name, group_id, user_id) VALUES (24, 'Shae', 5, 28);
+INSERT INTO students (id, name, group_id, user_id) VALUES (25, 'Margaery Tyrell', 5, 29);
 
-INSERT INTO students (id, name, group_id) VALUES (26, 'Tywin Lannister', 6);
-INSERT INTO students (id, name, group_id) VALUES (27, 'Talisa Maegyr', 6);
-INSERT INTO students (id, name, group_id) VALUES (28, 'Ygritte', 6);
-INSERT INTO students (id, name, group_id) VALUES (29, 'Gendry', 6);
-INSERT INTO students (id, name, group_id) VALUES (30, 'Tormund Giantsbane', 6);
+INSERT INTO students (id, name, group_id, user_id) VALUES (26, 'Tywin Lannister', 6, 30);
+INSERT INTO students (id, name, group_id, user_id) VALUES (27, 'Talisa Maegyr', 6, 31);
+INSERT INTO students (id, name, group_id, user_id) VALUES (28, 'Ygritte', 6, 32);
+INSERT INTO students (id, name, group_id, user_id) VALUES (29, 'Gendry', 6, 33);
+INSERT INTO students (id, name, group_id, user_id) VALUES (30, 'Tormund Giantsbane', 6, 34);
 
 
-INSERT INTO tutors (id, name) VALUES (1, 'Jon Snow');
-INSERT INTO tutors (id, name) VALUES (2, 'Robert Baratheon');
-INSERT INTO tutors (id, name) VALUES (3, 'Eddard "Ned" Stark');
+INSERT INTO tutors (id, name, user_id) VALUES (1, 'Jon Snow', 2);
+INSERT INTO tutors (id, name, user_id) VALUES (2, 'Robert Baratheon', 3);
+INSERT INTO tutors (id, name, user_id) VALUES (3, 'Eddard "Ned" Stark', 4);
 
 INSERT INTO courses (id, name, group_id, tutor_id) VALUES (1, 'Mathematics', 1, 1);
 INSERT INTO courses (id, name, group_id, tutor_id) VALUES (2, 'History', 1, 2);
@@ -162,19 +238,3 @@ INSERT INTO lessons (id, hours, location, start, course_id, day_of_week_id, grou
 INSERT INTO lessons (id, hours, location, start, course_id, day_of_week_id, group_id, tutor_id) VALUES (25, 1, 'a103', '2022-09-05 08:00', 3, 3, 3, 3);
 INSERT INTO lessons (id, hours, location, start, course_id, day_of_week_id, group_id, tutor_id) VALUES (26, 1, 'a103', '2022-09-05 09:00', 1, 3, 3, 1);
 INSERT INTO lessons (id, hours, location, start, course_id, day_of_week_id, group_id, tutor_id) VALUES (27, 1, 'a103', '2022-09-05 10:00', 2, 3, 3, 2);
-
-INSERT INTO roles (name)
-values
-('ROLE_USER'), ('ROLE_ADMIN');
-
-insert into users (username, password, email)
-values
-('admin' , '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'admin@gmail.com');
-
-insert into users (username, password, email)
-values
-('user' , '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'user@gmail.com');
-
-insert into users_roles (user_id, role_id) values (1, 2);
-
-insert into users_roles (user_id, role_id) values (2, 1);
