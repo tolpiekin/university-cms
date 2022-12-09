@@ -9,6 +9,8 @@ public interface StudentService {
 
     Student findById(Long id);
 
+    Student findByUserId(Long userId);
+
     List<Student> findAll();
 
     Student update(Student student);

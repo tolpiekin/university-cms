@@ -43,4 +43,10 @@ public class TutorServiceImpl implements TutorService {
         findById(id);
         tutorRepository.deleteById(id);
     }
+
+    @Override
+    public Tutor findByUserId(Long userId) {
+        return tutorRepository.findByUserId(userId).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Tutor Not Found"));
+    }
 }

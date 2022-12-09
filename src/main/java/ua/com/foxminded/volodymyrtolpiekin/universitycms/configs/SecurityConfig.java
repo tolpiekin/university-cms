@@ -1,6 +1,5 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.configs;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -8,14 +7,13 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.UserService;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.UserServiceImpl;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private UserService userService;
+    private final UserServiceImpl userService;
 
-    @Autowired
-    public void setUserService(UserService userService) {
+    public SecurityConfig(UserServiceImpl userService) {
         this.userService = userService;
     }
 
@@ -28,6 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/profile/**").hasRole("STUFF")
                 .and()
                 .formLogin()
+                .defaultSuccessUrl("/welcome")
                 .and()
                 .logout().logoutSuccessUrl("/");
     }

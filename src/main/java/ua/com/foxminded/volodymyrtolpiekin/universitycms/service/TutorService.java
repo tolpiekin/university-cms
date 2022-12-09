@@ -14,4 +14,6 @@ public interface TutorService {
     Tutor update(Tutor tutor);
 
     void deleteById(Long id);
+
+    Tutor findByUserId(Long userId);
 }
