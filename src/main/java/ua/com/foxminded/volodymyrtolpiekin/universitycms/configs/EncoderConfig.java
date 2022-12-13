@@ -1,2 +1,2 @@
-package ua.com.foxminded.volodymyrtolpiekin.universitycms.configs;public class EncoderConfig {
+package ua.com.foxminded.volodymyrtolpiekin.universitycms.configs;public class PasswordEncoder {
 }
