@@ -47,7 +47,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    private AuthenticationProvider authenticationProvider() {
+    public AuthenticationProvider authenticationProvider() {
         final DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService());
         authenticationProvider.setPasswordEncoder(passwordEncoder());
@@ -60,12 +60,12 @@ public class SecurityConfig {
     }
 
     @Bean
-    private PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
     }
 
     @Bean
-    private UserDetailsService userDetailsService() {
+    public UserDetailsService userDetailsService() {
         return new UserDetailsService() {
 
             @Override
