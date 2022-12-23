@@ -29,12 +29,6 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student findByUserId(Long userId) {
-        return studentRepository.findByUserId(userId).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Student Not Found"));
-    }
-
-    @Override
     public List<Student> findAll(){
         return studentRepository.findAll();
     }

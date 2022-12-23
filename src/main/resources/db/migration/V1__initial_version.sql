@@ -2,22 +2,8 @@ CREATE TABLE users (
     id          bigserial,
     username    varchar(30) NOT NULL,
     password    varchar(80),
-    email       varchar(50) UNIQUE,
+    type       varchar(30),
     primary key(id)
-);
-
-CREATE TABLE roles (
-    id          bigserial,
-    name        varchar(50) NOT NULL,
-    primary key (id)
-);
-
-CREATE TABLE users_roles (
-    user_id     bigint NOT NULL,
-    role_id     bigint NOT NULL,
-    primary key (user_id, role_id),
-    foreign key (user_id) references users (id),
-    foreign key (role_id) references roles (id)
 );
 
 CREATE TABLE groups (
@@ -29,9 +15,7 @@ CREATE TABLE groups (
 CREATE TABLE tutors (
     id bigserial,
     name varchar(255),
-    user_id bigint,
-    primary key (id),
-    foreign key (user_id) references users (id)
+    primary key (id)
 );
 
 CREATE TABLE courses (
@@ -48,10 +32,8 @@ CREATE TABLE students (
     id bigserial,
     name character varying(255),
     group_id bigint,
-    user_id bigint,
     primary key (id),
-    foreign key (group_id) references groups (id),
-    foreign key (user_id) references users (id)
+    foreign key (group_id) references groups (id)
 );
 
 CREATE TABLE topics (
