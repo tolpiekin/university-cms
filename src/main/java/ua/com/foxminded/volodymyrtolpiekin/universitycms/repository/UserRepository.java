@@ -15,22 +15,22 @@ public class UserRepository {
     private final static List<UserDetails> APPLICATION_USERS = Arrays.asList(
             new User(
                     "admin@gmail.com",
-                    "password",
+                    "$2a$12$c4sV3qlxJkKlWq8czyJDBObHNzizlCX7lQ4pDKJgIrleQLpXoQ6Uu",
                     Collections.singleton(new SimpleGrantedAuthority("ROLE_ADMIN"))
             ),
             new User(
                     "student@gmail.com",
-                    "password",
+                    "$2a$12$c4sV3qlxJkKlWq8czyJDBObHNzizlCX7lQ4pDKJgIrleQLpXoQ6Uu",
                     Collections.singleton(new SimpleGrantedAuthority("ROLE_STUDENT"))
             ),
             new User(
                     "teacher@gmail.com",
-                    "password",
+                    "$2a$12$c4sV3qlxJkKlWq8czyJDBObHNzizlCX7lQ4pDKJgIrleQLpXoQ6Uu",
                     Collections.singleton(new SimpleGrantedAuthority("ROLE_TEACHER"))
             ),
             new User(
                     "stuff@gmail.com",
-                    "password",
+                    "$2a$12$c4sV3qlxJkKlWq8czyJDBObHNzizlCX7lQ4pDKJgIrleQLpXoQ6Uu",
                     Collections.singleton(new SimpleGrantedAuthority("ROLE_STUFF"))
             )
     );
