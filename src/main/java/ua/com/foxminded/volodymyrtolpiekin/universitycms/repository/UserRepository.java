@@ -1,49 +1,23 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.User;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-public class UserRepository {
-    private final static List<UserDetails> APPLICATION_USERS = Arrays.asList(
-            new User(
-                    "admin@gmail.com",
-                    "$2a$12$c4sV3qlxJkKlWq8czyJDBObHNzizlCX7lQ4pDKJgIrleQLpXoQ6Uu",
-                    Collections.singleton(new SimpleGrantedAuthority("ROLE_ADMIN"))
-            ),
-            new User(
-                    "student@gmail.com",
-                    "$2a$12$c4sV3qlxJkKlWq8czyJDBObHNzizlCX7lQ4pDKJgIrleQLpXoQ6Uu",
-                    Collections.singleton(new SimpleGrantedAuthority("ROLE_STUDENT"))
-            ),
-            new User(
-                    "teacher@gmail.com",
-                    "$2a$12$c4sV3qlxJkKlWq8czyJDBObHNzizlCX7lQ4pDKJgIrleQLpXoQ6Uu",
-                    Collections.singleton(new SimpleGrantedAuthority("ROLE_TEACHER"))
-            ),
-            new User(
-                    "stuff@gmail.com",
-                    "$2a$12$c4sV3qlxJkKlWq8czyJDBObHNzizlCX7lQ4pDKJgIrleQLpXoQ6Uu",
-                    Collections.singleton(new SimpleGrantedAuthority("ROLE_STUFF"))
-            )
-    );
+public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByUsername(String username);
 
-    public UserDetails findUserByEmail(String email) {
-        return APPLICATION_USERS
-                .stream()
-                .filter(u -> u.getUsername().equals(email))
-                .findFirst()
-                .orElseThrow(() -> new UsernameNotFoundException("No user was found"));
-    }
+    Boolean existsByUsername(String username);
 
-    public List<UserDetails> findAll() {
-        return APPLICATION_USERS;
-    }
+    Boolean existsByEmail(String email);
+
 }
