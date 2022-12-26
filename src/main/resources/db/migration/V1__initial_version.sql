@@ -1,9 +1,20 @@
 CREATE TABLE users (
     id          bigserial,
-    username    varchar(30) NOT NULL,
-    password    varchar(80),
-    type       varchar(30),
+    username    varchar(20) NOT NULL,
+    email       varchar(50) NOT NULL,
+    password    varchar(120),
     primary key(id)
+);
+
+CREATE TABLE roles (
+    id          serial,
+    name        varchar(20),
+    primary key(id)
+);
+
+CREATE TABLE user_roles (
+    user_id     bigint NOT NULL,
+    role_id     integer NOT NULL
 );
 
 CREATE TABLE groups (

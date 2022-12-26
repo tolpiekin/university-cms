@@ -1,4 +1,4 @@
-package ua.com.foxminded.volodymyrtolpiekin.universitycms.controler;
+package ua.com.foxminded.volodymyrtolpiekin.universitycms.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

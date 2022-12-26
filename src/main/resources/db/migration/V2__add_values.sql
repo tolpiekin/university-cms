@@ -1,39 +1,7 @@
-insert into users (id, username, password, type)
-values
-(1, 'admin', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'ADMIN'),
-(2, 'nedstark', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'TUTOR'),
-(3, 'robertbaratheon', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'TUTOR'),
-(4, 'jonsnow', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'TUTOR'),
-(34, 'tormudgiantsbane', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(33, 'gendry', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(32, 'ygritte', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(31, 'talisamaegyr', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(30, 'tywinlannister', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(29, 'margaerytyrell', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(28, 'shae', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(27, 'varys', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(26, 'bronn', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(25, 'jearmormont', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(24, 'melisandre', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(23, 'stannisbaratheon', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(22, 'samwelltarly', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(21, 'davosseaworth', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(20, 'patyrbaelish', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(19, 'khaldrogo', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(18, 'tyrionlannister', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(17, 'sandorclegane', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(16, 'joffreybaratheon', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(15, 'branstark', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(14, 'theongreyjoy', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(13, 'aryastark', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(12, 'sansastark', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(11, 'robbstark', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(10, 'viserystargaryen', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(9, 'jorahmormont', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(8, 'daenerystargaryen', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(7, 'cerseilannister', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(6, 'catelynstark', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT'),
-(5, 'jaimelannister', '$2a$12$ODZxf/BGTU38wzmvTJAf/uuK4lKgV9J/yJUH.h3Sn4O8cNLi4ddf6', 'STUDENT');
+INSERT INTO roles(name) VALUES('ROLE_ADMIN');
+INSERT INTO roles(name) VALUES('ROLE_STUFF');
+INSERT INTO roles(name) VALUES('ROLE_TEACHER');
+INSERT INTO roles(name) VALUES('ROLE_STUDENT');
 
 INSERT INTO groups (id, name) VALUES (1, 'gp1-1');
 INSERT INTO groups (id, name) VALUES (2, 'gp1-2');
