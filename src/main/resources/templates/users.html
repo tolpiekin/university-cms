@@ -16,6 +16,7 @@
                 <td th:text="${user.id}"></td>
                 <td th:text="${user.username}"></td>
                 <td th:text="${user.email}"></td>
+                <td th:each="role: ${user.roles}" th:text="${role.getName()}"></td>
             </tr>
             </tbody>
         </table>
