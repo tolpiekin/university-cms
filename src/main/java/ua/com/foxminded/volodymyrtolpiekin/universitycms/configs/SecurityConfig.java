@@ -62,7 +62,9 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/api/auth/signin").permitAll()
+                .antMatchers("/api/auth/signup").hasAnyRole("STUFF", "ADMIN")
+                .antMatchers("/api/admin/**").hasRole("ADMIN")
                 .antMatchers("/api/test/**").permitAll()
                 .anyRequest()
                 .authenticated();
