@@ -16,6 +16,7 @@ import ua.com.foxminded.volodymyrtolpiekin.universitycms.payload.request.SignupR
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.payload.response.MessageResponse;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.RoleRepository;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.UserRepository;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.UserDetailsServiceImpl;
 
 import javax.validation.Valid;
 import java.util.HashSet;
@@ -29,15 +30,18 @@ public class AuthController {
 
     private final UserRepository userRepository;
 
+    private final UserDetailsServiceImpl userDetailsService;
+
     private final RoleRepository roleRepository;
 
     private final PasswordEncoder encoder;
 
     private final JwtUtils jwtUtils;
 
-    public AuthController(AuthenticationManager authenticationManager, UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder encoder, JwtUtils jwtUtils) {
+    public AuthController(AuthenticationManager authenticationManager, UserRepository userRepository, UserDetailsServiceImpl userDetailsService, RoleRepository roleRepository, PasswordEncoder encoder, JwtUtils jwtUtils) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
+        this.userDetailsService = userDetailsService;
         this.roleRepository = roleRepository;
         this.encoder = encoder;
         this.jwtUtils = jwtUtils;
@@ -51,63 +55,20 @@ public class AuthController {
 
 
     @PostMapping("/sign-up")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signupRequest) {
+        if (userDetailsService.ifUsernameExists(signupRequest)) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Username is already taken!"));
         }
 
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+        if (userDetailsService.ifEmailExists(signupRequest)) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
 
-        User user = new User(signUpRequest.getUsername(),
-                signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
-
-        Set<String> strRoles = signUpRequest.getRole();
-        Set<Role> roles = new HashSet<>();
-
-        if (strRoles == null) {
-            Role studentRole = roleRepository.findByName(ERole.ROLE_STUDENT)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            roles.add(studentRole);
-        } else {
-            strRoles.forEach(role -> {
-                switch (role) {
-                    case "admin":
-                        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(adminRole);
-
-                        break;
-                    case "stuff":
-                        Role stuffRole = roleRepository.findByName(ERole.ROLE_STUFF)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(stuffRole);
-
-                        break;
-                    case "teacher":
-                        Role teacherRole = roleRepository.findByName(ERole.ROLE_TEACHER)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(teacherRole);
-
-                        break;
-
-                    default:
-                        Role studentRole = roleRepository.findByName(ERole.ROLE_STUDENT)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(studentRole);
-                }
-            });
-        }
-
-        user.setRoles(roles);
-        userRepository.save(user);
-
+        userDetailsService.signUpNewUser(signupRequest);
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 }

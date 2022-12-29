@@ -13,7 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.payload.request.LoginRequest;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.payload.response.JwtResponse;
-import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.UserDetailsImpl;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.UserDetailsImpl;
 
 import java.util.Date;
 import java.util.List;

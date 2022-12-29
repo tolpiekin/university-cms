@@ -1,10 +1,9 @@
-package ua.com.foxminded.volodymyrtolpiekin.universitycms.service;
+package ua.com.foxminded.volodymyrtolpiekin.universitycms.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.User;
 
 import java.util.Collection;
 import java.util.List;
