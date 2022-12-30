@@ -1,10 +1,11 @@
-package ua.com.foxminded.volodymyrtolpiekin.universitycms.service;
+package ua.com.foxminded.volodymyrtolpiekin.universitycms.service.impl;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.DayOfWeek;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.DayOfWeekRepository;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.DayOfWeekService;
 
 import java.util.List;
 

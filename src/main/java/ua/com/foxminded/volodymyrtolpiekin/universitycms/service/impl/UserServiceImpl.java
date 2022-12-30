@@ -1,44 +1,31 @@
-package ua.com.foxminded.volodymyrtolpiekin.universitycms.service;
+package ua.com.foxminded.volodymyrtolpiekin.universitycms.service.impl;
 
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.ERole;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Role;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.User;
-import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.UserDetailsImpl;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.payload.request.SignupRequest;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.payload.response.MessageResponse;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.RoleRepository;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.UserRepository;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.UserService;
 
-import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-
     private final RoleRepository roleRepository;
-
     private final PasswordEncoder encoder;
 
-    public UserDetailsServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder encoder) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder encoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.encoder = encoder;
-    }
-
-    @Override
-    @Transactional
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
-
-        return UserDetailsImpl.build(user);
     }
 
     public boolean ifUsernameExists (SignupRequest signupRequest) {
@@ -49,14 +36,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return userRepository.existsByEmail(signupRequest.getEmail());
     }
 
-    public User signUpNewUser (SignupRequest signupRequest){
-        User user = new User(signupRequest.getUsername(),
-                signupRequest.getEmail(),
-                encoder.encode(signupRequest.getPassword()));
-
-        Set<String> strRoles = signupRequest.getRole();
+    public Set<Role> setRoles(Set<String> strRoles) {
         Set<Role> roles = new HashSet<>();
-
         if (strRoles == null) {
             Role studentRole = roleRepository.findByName(ERole.ROLE_STUDENT)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
@@ -90,8 +71,38 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 }
             });
         }
+        return roles;
+    }
 
-        user.setRoles(roles);
+    public ResponseEntity<?> signUpNewUser (SignupRequest signupRequest){
+
+        if (ifUsernameExists(signupRequest)) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Username is already taken!"));
+        }
+
+        if (ifEmailExists(signupRequest)) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Email is already in use!"));
+        }
+
+        User user = new User(signupRequest.getUsername(),
+                signupRequest.getEmail(),
+                encoder.encode(signupRequest.getPassword()));
+        user.setRoles(setRoles(signupRequest.getRole()));
+        create(user);
+        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    }
+
+    @Override
+    public User getByUsername(String username) {
+        return null;
+    }
+
+    @Override
+    public User create(User user) {
         userRepository.save(user);
         return user;
     }
