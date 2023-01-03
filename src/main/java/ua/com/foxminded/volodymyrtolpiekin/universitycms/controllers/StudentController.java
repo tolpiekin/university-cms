@@ -1,4 +1,4 @@
-package ua.com.foxminded.volodymyrtolpiekin.universitycms.controler;
+package ua.com.foxminded.volodymyrtolpiekin.universitycms.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

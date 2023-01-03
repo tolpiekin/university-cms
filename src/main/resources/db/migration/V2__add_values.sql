@@ -1,3 +1,8 @@
+INSERT INTO roles(name) VALUES('ROLE_ADMIN');
+INSERT INTO roles(name) VALUES('ROLE_STUFF');
+INSERT INTO roles(name) VALUES('ROLE_TEACHER');
+INSERT INTO roles(name) VALUES('ROLE_STUDENT');
+
 INSERT INTO groups (id, name) VALUES (1, 'gp1-1');
 INSERT INTO groups (id, name) VALUES (2, 'gp1-2');
 INSERT INTO groups (id, name) VALUES (3, 'gp1-3');

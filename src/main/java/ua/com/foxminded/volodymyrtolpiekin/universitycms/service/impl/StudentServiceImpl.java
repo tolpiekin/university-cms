@@ -1,10 +1,11 @@
-package ua.com.foxminded.volodymyrtolpiekin.universitycms.service;
+package ua.com.foxminded.volodymyrtolpiekin.universitycms.service.impl;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Student;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.StudentRepository;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.StudentService;
 
 import java.util.List;
 
