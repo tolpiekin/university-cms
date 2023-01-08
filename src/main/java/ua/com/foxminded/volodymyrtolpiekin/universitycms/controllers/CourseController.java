@@ -45,4 +45,20 @@ public class CourseController {
     ) {
         courseService.update(courseId, name, groupId, tutorId);
     }
+
+    @PutMapping(path = "assign-teacher/{courseId}")
+    public void assignTutor(
+            @PathVariable("courseId") Long courseId,
+            @RequestParam Long tutorId
+    ) {
+        courseService.update(courseId, null, null, tutorId);
+    }
+
+    @PutMapping(path = "assign-group/{courseId}")
+    public void assignGroup(
+            @PathVariable("courseId") Long courseId,
+            @RequestParam Long groupId
+    ) {
+        courseService.update(courseId, null, groupId, null);
+    }
 }
