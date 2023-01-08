@@ -25,7 +25,8 @@ public class CourseController {
         courseService.addCourse(course);
     }
 
-    @DeleteMapping(path = {"courseId"})
+    @DeleteMapping(path = "{courseId}")
+    @ResponseBody
     public void deleteStudent(@PathVariable("courseId") Long courseId) {
         courseService.deleteById(courseId);
     }
