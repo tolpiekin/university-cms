@@ -1,5 +1,7 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -8,23 +10,39 @@ import java.util.List;
 public class Course {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE)
+    @SequenceGenerator(
+            name = "courses_sequence",
+            sequenceName = "courses_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy= GenerationType.SEQUENCE,
+            generator = "courses_sequence"
+    )
     private Long id;
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "course")
     private List<Lesson> lessons;
 
+    @JsonIgnore
     @ManyToOne
     private Group group;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "course")
     private List<Topic> topics;
 
+    @JsonIgnore
     @ManyToOne
     private Tutor tutor;
 
     public Course() {
+    }
+
+    public Course(String name) {
+        this.name = name;
     }
 
     public Long getId() {

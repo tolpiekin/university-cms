@@ -1,21 +1,47 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.controllers;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.CourseRepository;
+import org.springframework.web.bind.annotation.*;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Course;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.CourseService;
 
-@Controller
+import java.util.List;
+
+@RestController
+@RequestMapping(path = "/api/courses")
 public class CourseController {
-    private final CourseRepository courseRepository;
+    private final CourseService courseService;
 
-    public CourseController(CourseRepository courseRepository) {
-        this.courseRepository = courseRepository;
+    public CourseController(CourseService courseService) {
+        this.courseService = courseService;
     }
 
-    @GetMapping("/courses")
-    public String showCoursesList(Model model) {
-        model.addAttribute("courses", courseRepository.findAll());
-        return "courses";
+    @GetMapping
+    public List<Course> showCoursesList() {
+        return courseService.findAll();
+    }
+
+    @PostMapping
+    public void addCourse(@RequestBody Course course) {
+        courseService.addCourse(course);
+    }
+
+    @DeleteMapping(path = {"courseId"})
+    public void deleteStudent(@PathVariable("courseId") Long courseId) {
+        courseService.deleteById(courseId);
+    }
+
+    @GetMapping(path = "{courseId}")
+    public Course getOneCourse(@PathVariable("courseId") Long courseId) {
+        return courseService.findById(courseId);
+    }
+
+    @PutMapping(path = "{courseId}")
+    public void updateCourse(
+            @PathVariable("courseId") Long courseId,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Long groupId,
+            @RequestParam(required = false) Long tutorId
+    ) {
+        courseService.update(courseId, name, groupId, tutorId);
     }
 }
