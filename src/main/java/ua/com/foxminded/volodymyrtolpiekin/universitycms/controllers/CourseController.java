@@ -56,24 +56,12 @@ public class CourseController {
     }
 
     @PutMapping(path = "assign-teacher/{courseId}")
-    public void assignTeacher(
-            @PathVariable("courseId") Long courseId,
-            @RequestParam Long tutorId
-    ) {
-        CourseDTO courseDTO = new CourseDTO();
-        courseDTO.setId(courseId);
-        courseDTO.setTutorId(tutorId);
+    public void assignTeacher(@RequestBody CourseDTO courseDTO) {
         courseService.update(mapper.map(courseDTO, Course.class));
     }
 
     @PutMapping(path = "assign-group/{courseId}")
-    public void assignGroup(
-            @PathVariable("courseId") Long courseId,
-            @RequestParam Long groupId
-    ) {
-        CourseDTO courseDTO = new CourseDTO();
-        courseDTO.setId(courseId);
-        courseDTO.setGroupId(groupId);
+    public void assignGroup(@RequestBody CourseDTO courseDTO) {
         courseService.update(mapper.map(courseDTO, Course.class));
     }
 }
