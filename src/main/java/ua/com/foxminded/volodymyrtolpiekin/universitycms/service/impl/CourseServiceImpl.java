@@ -47,9 +47,11 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public void deleteById(Long id){
-        Course course = findById(id);
-        course.getTopics().forEach(t -> t.setCourse(null));
-        course.getLessons().forEach(l -> l.setCourse(null));
-        courseRepository.deleteById(id);
+        if (courseRepository.existsById(id)) {
+            Course course = findById(id);
+            course.getTopics().forEach(t -> t.setCourse(null));
+            course.getLessons().forEach(l -> l.setCourse(null));
+            courseRepository.deleteById(id);
+        }
     }
 }
