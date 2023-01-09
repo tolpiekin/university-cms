@@ -42,15 +42,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Course update(Course course){
-        Long courseId = course.getId();
-        Course newCourse = courseRepository.findById(courseId).orElseThrow(() -> new CourseNotFoundException(courseId));
-        if (course.getName() != null && !course.getName().equals(newCourse.getName()))
-            newCourse.setName(course.getName());
-        if (course.getGroup() != null && !course.getGroup().equals(newCourse.getGroup()))
-            newCourse.setGroup(course.getGroup());
-        if (course.getTutor() != null && !course.getTutor().equals(newCourse.getTutor()))
-            newCourse.setTutor(course.getTutor());
-        return courseRepository.save(newCourse);
+        return courseRepository.save(course);
     }
 
     @Override

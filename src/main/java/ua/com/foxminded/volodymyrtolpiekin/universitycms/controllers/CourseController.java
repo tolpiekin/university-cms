@@ -1,9 +1,9 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.controllers;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.dto.CourseDTO;
-import ua.com.foxminded.volodymyrtolpiekin.universitycms.mapper.CourseMapper;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Course;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.CourseService;
 
@@ -15,9 +15,9 @@ import static java.util.stream.Collectors.toList;
 @RequestMapping(path = "/api/courses")
 public class CourseController {
     private final CourseService courseService;
-    private final CourseMapper mapper;
+    private final ModelMapper mapper;
 
-    public CourseController(CourseService courseService, CourseMapper mapper) {
+    public CourseController(CourseService courseService, ModelMapper mapper) {
         this.courseService = courseService;
         this.mapper = mapper;
     }
@@ -26,14 +26,14 @@ public class CourseController {
     public List<CourseDTO> showCoursesList() {
         return courseService.findAll()
                 .stream()
-                .map(mapper::toDto)
+                .map(course -> mapper.map(course, CourseDTO.class))
                 .collect(toList());
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Course createCourse(@RequestBody CourseDTO courseDTO) {
-        Course course = mapper.toCourse(courseDTO);
+        Course course = mapper.map(courseDTO, Course.class);
         courseService.addCourse(course);
         return course;
     }
@@ -46,18 +46,13 @@ public class CourseController {
     @GetMapping(path = "{courseId}")
     public CourseDTO getOneCourse(@PathVariable("courseId") Long courseId) {
         Course course = courseService.findById(courseId);
-        return mapper.toDto(course);
+        return mapper.map(course, CourseDTO.class);
     }
 
-    @PutMapping(path = "{courseId}")
-    public void updateCourse(
-            @PathVariable("courseId") Long courseId,
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) Long groupId,
-            @RequestParam(required = false) Long tutorId
-    ) {
-        CourseDTO courseDTO = new CourseDTO(courseId, name, groupId, tutorId);
-        courseService.update(mapper.toCourse(courseDTO));
+    @PutMapping
+    public void updateCourse(@RequestBody CourseDTO courseDTO) {
+        System.out.println(courseDTO.toString());
+        courseService.update(mapper.map(courseDTO, Course.class));
     }
 
     @PutMapping(path = "assign-teacher/{courseId}")
@@ -68,7 +63,7 @@ public class CourseController {
         CourseDTO courseDTO = new CourseDTO();
         courseDTO.setId(courseId);
         courseDTO.setTutorId(tutorId);
-        courseService.update(mapper.toCourse(courseDTO));
+        courseService.update(mapper.map(courseDTO, Course.class));
     }
 
     @PutMapping(path = "assign-group/{courseId}")
@@ -79,6 +74,6 @@ public class CourseController {
         CourseDTO courseDTO = new CourseDTO();
         courseDTO.setId(courseId);
         courseDTO.setGroupId(groupId);
-        courseService.update(mapper.toCourse(courseDTO));
+        courseService.update(mapper.map(courseDTO, Course.class));
     }
 }
