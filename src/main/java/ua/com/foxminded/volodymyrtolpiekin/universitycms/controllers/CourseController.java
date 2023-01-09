@@ -1,5 +1,6 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.controllers;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.dto.CourseDTO;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.mapper.CourseMapper;
@@ -22,7 +23,6 @@ public class CourseController {
     }
 
     @GetMapping
-    @ResponseBody
     public List<CourseDTO> showCoursesList() {
         return courseService.findAll()
                 .stream()
@@ -31,20 +31,19 @@ public class CourseController {
     }
 
     @PostMapping
-    @ResponseBody
-    public void addCourse(@RequestBody CourseDTO courseDTO) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public Course createCourse(@RequestBody CourseDTO courseDTO) {
         Course course = mapper.toCourse(courseDTO);
         courseService.addCourse(course);
+        return course;
     }
 
     @DeleteMapping(path = "{courseId}")
-    @ResponseBody
     public void deleteStudent(@PathVariable("courseId") Long courseId) {
         courseService.deleteById(courseId);
     }
 
     @GetMapping(path = "{courseId}")
-    @ResponseBody
     public CourseDTO getOneCourse(@PathVariable("courseId") Long courseId) {
         Course course = courseService.findById(courseId);
         return mapper.toDto(course);
