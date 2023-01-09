@@ -3,6 +3,7 @@ package ua.com.foxminded.volodymyrtolpiekin.universitycms.service.impl;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.exceptions.CourseNotFoundException;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Course;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.CourseRepository;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.GroupService;
@@ -41,7 +42,15 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Course update(Course course){
-        return courseRepository.save(course);
+        Long courseId = course.getId();
+        Course newCourse = courseRepository.findById(courseId).orElseThrow(() -> new CourseNotFoundException(courseId));
+        if (course.getName() != null && !course.getName().equals(newCourse.getName()))
+            newCourse.setName(course.getName());
+        if (course.getGroup() != null && !course.getGroup().equals(newCourse.getGroup()))
+            newCourse.setGroup(course.getGroup());
+        if (course.getTutor() != null && !course.getTutor().equals(newCourse.getTutor()))
+            newCourse.setTutor(course.getTutor());
+        return courseRepository.save(newCourse);
     }
 
     @Override
@@ -50,20 +59,5 @@ public class CourseServiceImpl implements CourseService {
         course.getTopics().forEach(t -> t.setCourse(null));
         course.getLessons().forEach(l -> l.setCourse(null));
         courseRepository.deleteById(id);
-    }
-
-    @Override
-    public Course update(Long courseId, String name, Long groupId, Long tutorId) {
-        Course course = findById(courseId);
-        if (name != null) {
-            course.setName(name);
-        }
-        if (groupId != null) {
-            course.setGroup(groupService.findById(groupId));
-        }
-        if (tutorId != null) {
-            course.setTutor(tutorService.findById(tutorId));
-        }
-        return courseRepository.save(course);
     }
 }

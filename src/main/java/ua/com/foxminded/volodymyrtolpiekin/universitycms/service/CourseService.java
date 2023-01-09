@@ -14,6 +14,4 @@ public interface CourseService {
     Course update(Course course);
 
     void deleteById(Long id);
-
-    Course update(Long courseId, String name, Long groupId, Long tutorId);
 }

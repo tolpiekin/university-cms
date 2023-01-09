@@ -1,27 +1,39 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.controllers;
 
 import org.springframework.web.bind.annotation.*;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.dto.CourseDTO;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.mapper.CourseMapper;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Course;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.CourseService;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 @RestController
 @RequestMapping(path = "/api/courses")
 public class CourseController {
     private final CourseService courseService;
+    private final CourseMapper mapper;
 
-    public CourseController(CourseService courseService) {
+    public CourseController(CourseService courseService, CourseMapper mapper) {
         this.courseService = courseService;
+        this.mapper = mapper;
     }
 
     @GetMapping
-    public List<Course> showCoursesList() {
-        return courseService.findAll();
+    @ResponseBody
+    public List<CourseDTO> showCoursesList() {
+        return courseService.findAll()
+                .stream()
+                .map(mapper::toDto)
+                .collect(toList());
     }
 
     @PostMapping
-    public void addCourse(@RequestBody Course course) {
+    @ResponseBody
+    public void addCourse(@RequestBody CourseDTO courseDTO) {
+        Course course = mapper.toCourse(courseDTO);
         courseService.addCourse(course);
     }
 
@@ -32,8 +44,10 @@ public class CourseController {
     }
 
     @GetMapping(path = "{courseId}")
-    public Course getOneCourse(@PathVariable("courseId") Long courseId) {
-        return courseService.findById(courseId);
+    @ResponseBody
+    public CourseDTO getOneCourse(@PathVariable("courseId") Long courseId) {
+        Course course = courseService.findById(courseId);
+        return mapper.toDto(course);
     }
 
     @PutMapping(path = "{courseId}")
@@ -43,15 +57,19 @@ public class CourseController {
             @RequestParam(required = false) Long groupId,
             @RequestParam(required = false) Long tutorId
     ) {
-        courseService.update(courseId, name, groupId, tutorId);
+        CourseDTO courseDTO = new CourseDTO(courseId, name, groupId, tutorId);
+        courseService.update(mapper.toCourse(courseDTO));
     }
 
     @PutMapping(path = "assign-teacher/{courseId}")
-    public void assignTutor(
+    public void assignTeacher(
             @PathVariable("courseId") Long courseId,
             @RequestParam Long tutorId
     ) {
-        courseService.update(courseId, null, null, tutorId);
+        CourseDTO courseDTO = new CourseDTO();
+        courseDTO.setId(courseId);
+        courseDTO.setTutorId(tutorId);
+        courseService.update(mapper.toCourse(courseDTO));
     }
 
     @PutMapping(path = "assign-group/{courseId}")
@@ -59,6 +77,9 @@ public class CourseController {
             @PathVariable("courseId") Long courseId,
             @RequestParam Long groupId
     ) {
-        courseService.update(courseId, null, groupId, null);
+        CourseDTO courseDTO = new CourseDTO();
+        courseDTO.setId(courseId);
+        courseDTO.setGroupId(groupId);
+        courseService.update(mapper.toCourse(courseDTO));
     }
 }
