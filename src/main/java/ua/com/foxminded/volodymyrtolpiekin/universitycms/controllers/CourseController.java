@@ -46,7 +46,6 @@ public class CourseController {
 
     @PutMapping
     public void updateCourse(@RequestBody CourseDTO courseDTO) {
-        System.out.println(courseDTO.toString());
         courseService.update(mapper.map(courseDTO, Course.class));
     }
 
