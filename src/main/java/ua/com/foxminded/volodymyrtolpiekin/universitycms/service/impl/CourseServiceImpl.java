@@ -67,4 +67,11 @@ public class CourseServiceImpl implements CourseService {
                 .map(course -> mapper.map(course, CourseDTO.class))
                 .collect(toList());
     }
+
+    @Override
+    public Course addCourseDTO(CourseDTO courseDTO) {
+        Course course = mapper.map(courseDTO, Course.class);
+        addCourse(course);
+        return course;
+    }
 }

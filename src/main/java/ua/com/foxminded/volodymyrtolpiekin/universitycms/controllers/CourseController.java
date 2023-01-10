@@ -25,18 +25,12 @@ public class CourseController {
     @GetMapping
     public List<CourseDTO> showCoursesList() {
         return courseService.readAllDTOs();
-        //return courseService.findAll()
-        //        .stream()
-        //        .map(course -> mapper.map(course, CourseDTO.class))
-        //        .collect(toList());
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Course createCourse(@RequestBody CourseDTO courseDTO) {
-        Course course = mapper.map(courseDTO, Course.class);
-        courseService.addCourse(course);
-        return course;
+        return courseService.addCourseDTO(courseDTO);
     }
 
     @DeleteMapping(path = "{courseId}")
