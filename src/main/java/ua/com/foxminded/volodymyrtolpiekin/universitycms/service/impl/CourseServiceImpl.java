@@ -1,9 +1,10 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.service.impl;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import ua.com.foxminded.volodymyrtolpiekin.universitycms.exceptions.CourseNotFoundException;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.dto.CourseDTO;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Course;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.CourseRepository;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.GroupService;
@@ -12,16 +13,20 @@ import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.TutorService;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 @Service
 public class CourseServiceImpl implements CourseService {
     private final CourseRepository courseRepository;
     private final GroupService groupService;
     private final TutorService tutorService;
+    private final ModelMapper mapper;
 
-    public CourseServiceImpl(CourseRepository courseRepository, GroupService groupService, TutorService tutorService) {
+    public CourseServiceImpl(CourseRepository courseRepository, GroupService groupService, TutorService tutorService, ModelMapper mapper) {
         this.courseRepository = courseRepository;
         this.groupService = groupService;
         this.tutorService = tutorService;
+        this.mapper = mapper;
     }
 
     @Override
@@ -53,5 +58,13 @@ public class CourseServiceImpl implements CourseService {
             course.getLessons().forEach(l -> l.setCourse(null));
             courseRepository.deleteById(id);
         }
+    }
+
+    @Override
+    public List<CourseDTO> readAllDTOs() {
+        return findAll()
+                .stream()
+                .map(course -> mapper.map(course, CourseDTO.class))
+                .collect(toList());
     }
 }
