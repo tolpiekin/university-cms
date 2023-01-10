@@ -50,8 +50,8 @@ public class CourseController {
     }
 
     @PutMapping(path = "assign-teacher/{courseId}")
-    public void assignTeacher(@RequestBody CourseDTO courseDTO) {
-        courseService.update(mapper.map(courseDTO, Course.class));
+    public Course assignTeacher(@RequestBody CourseDTO courseDTO) {
+        return courseService.update(mapper.map(courseDTO, Course.class));
     }
 
     @PutMapping(path = "assign-group/{courseId}")
