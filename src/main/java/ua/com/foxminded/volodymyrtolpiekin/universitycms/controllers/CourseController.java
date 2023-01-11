@@ -9,8 +9,6 @@ import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.CourseService;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-
 @RestController
 @RequestMapping(path = "/api/courses")
 public class CourseController {
@@ -29,8 +27,8 @@ public class CourseController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Course createCourse(@RequestBody CourseDTO courseDTO) {
-        return courseService.addCourseDTO(courseDTO);
+    public CourseDTO createCourse(@RequestBody CourseDTO courseDTO) {
+        return courseService.createCourse(courseDTO);
     }
 
     @DeleteMapping(path = "{courseId}")
@@ -39,9 +37,8 @@ public class CourseController {
     }
 
     @GetMapping(path = "{courseId}")
-    public CourseDTO getOneCourse(@PathVariable("courseId") Long courseId) {
-        Course course = courseService.findById(courseId);
-        return mapper.map(course, CourseDTO.class);
+    public CourseDTO getCourse(@PathVariable("courseId") Long courseId) {
+        return courseService.findDTOById(courseId);
     }
 
     @PutMapping

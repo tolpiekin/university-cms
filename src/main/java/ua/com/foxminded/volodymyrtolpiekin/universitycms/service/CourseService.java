@@ -18,5 +18,7 @@ public interface CourseService {
 
     List<CourseDTO> readAllDTOs();
 
-    Course addCourseDTO(CourseDTO courseDTO);
+    CourseDTO createCourse(CourseDTO courseDTO);
+
+    CourseDTO findDTOById(Long courseId);
 }

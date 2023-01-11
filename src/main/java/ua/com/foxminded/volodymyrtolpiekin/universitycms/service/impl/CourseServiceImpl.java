@@ -66,9 +66,14 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public Course addCourseDTO(CourseDTO courseDTO) {
+    public CourseDTO createCourse(CourseDTO courseDTO) {
         Course course = mapper.map(courseDTO, Course.class);
         addCourse(course);
-        return course;
+        return courseDTO;
+    }
+
+    @Override
+    public CourseDTO findDTOById(Long courseId) {
+        return mapper.map(findById(courseId), CourseDTO.class);
     }
 }
