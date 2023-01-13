@@ -62,8 +62,7 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public GroupDTO createGroup(GroupDTO groupDTO) {
         Group group = mapper.map(groupDTO, Group.class);
-        addGroup(group);
-        return groupDTO;
+        return mapper.map(addGroup(group), GroupDTO.class);
     }
 
     @Override
