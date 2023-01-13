@@ -68,8 +68,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public CourseDTO createCourse(CourseDTO courseDTO) {
         Course course = mapper.map(courseDTO, Course.class);
-        addCourse(course);
-        return courseDTO;
+        return mapper.map(addCourse(course), CourseDTO.class);
     }
 
     @Override
