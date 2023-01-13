@@ -1,21 +1,58 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.controllers;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.CourseRepository;
+import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.dto.CourseDTO;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Course;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.CourseService;
 
-@Controller
+import java.util.List;
+
+@RestController
+@RequestMapping(path = "/api/courses")
 public class CourseController {
-    private final CourseRepository courseRepository;
+    private final CourseService courseService;
+    private final ModelMapper mapper;
 
-    public CourseController(CourseRepository courseRepository) {
-        this.courseRepository = courseRepository;
+    public CourseController(CourseService courseService, ModelMapper mapper) {
+        this.courseService = courseService;
+        this.mapper = mapper;
     }
 
-    @GetMapping("/courses")
-    public String showCoursesList(Model model) {
-        model.addAttribute("courses", courseRepository.findAll());
-        return "courses";
+    @GetMapping
+    public List<CourseDTO> showCoursesList() {
+        return courseService.readAllDTOs();
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public CourseDTO createCourse(@RequestBody CourseDTO courseDTO) {
+        return courseService.createCourse(courseDTO);
+    }
+
+    @DeleteMapping(path = "{courseId}")
+    public void deleteStudent(@PathVariable("courseId") Long courseId) {
+        courseService.deleteById(courseId);
+    }
+
+    @GetMapping(path = "{courseId}")
+    public CourseDTO getCourse(@PathVariable("courseId") Long courseId) {
+        return courseService.findDTOById(courseId);
+    }
+
+    @PutMapping
+    public void updateCourse(@RequestBody CourseDTO courseDTO) {
+        courseService.update(mapper.map(courseDTO, Course.class));
+    }
+
+    @PutMapping(path = "assign-teacher/{courseId}")
+    public Course assignTeacher(@RequestBody CourseDTO courseDTO) {
+        return courseService.update(mapper.map(courseDTO, Course.class));
+    }
+
+    @PutMapping(path = "assign-group/{courseId}")
+    public void assignGroup(@RequestBody CourseDTO courseDTO) {
+        courseService.update(mapper.map(courseDTO, Course.class));
     }
 }

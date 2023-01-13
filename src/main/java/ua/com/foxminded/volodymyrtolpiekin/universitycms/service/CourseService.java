@@ -1,5 +1,6 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.service;
 
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.dto.CourseDTO;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Course;
 
 import java.util.List;
@@ -14,4 +15,10 @@ public interface CourseService {
     Course update(Course course);
 
     void deleteById(Long id);
+
+    List<CourseDTO> readAllDTOs();
+
+    CourseDTO createCourse(CourseDTO courseDTO);
+
+    CourseDTO findDTOById(Long courseId);
 }

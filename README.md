@@ -1,20 +1,22 @@
-# Task 3.4 Adding Security
-
-**Assignment**:
-1. Review your user/roles model, and ask your mentor for clarifications regarding your security model. For example, you can add ADMIN, STUDENT, TEACHER, and STUFF roles.
-2. Use basic security for user authentication.
-
-3. Create an admin panel for assigning a new user's role and create services that help the admin manage users.
-
-4. add required changes with login/logout functionality and logged-in user information to UI
-
+# Task 3.5 Implement Course view + edit feature
+**Assignment**
+1. Using your flows descriptions from task 3.1 create list of flows to implement, call it features, consult with Mentor if required.
 Example:
 
 User administration flow
 
 Given User `A` logged in with Admin role
-- User 'A' should be able to navigate to admin panel
-- User without admin role should not have access to user admin panel
-- User 'A' should be able to list all registered users on user admin page
-- User 'A' should be able to set required role for each registered user
+- User 'A' should be able to create/read/update/delete courses.
+  Given User `B` logged in with Student or Teacher role
+- User 'B' should be able to list all courses (read access).
+  Given User `C` logged in with Stuff rolef
+- User 'C' should be able to create/read/update all courses
+- User 'C' should be able to assign/reassign teacher to a course
+- User 'C' should be able to assign/reassign groups to a course.
   ... etc
+  
+2. Consider feature implementation as subtask(made in new branch and merged int main/master on completion)
+
+For each feature, implement UI pages(usually list, create, edit, delete, etc), controller/controller methods, service/service methods, repository methods.
+
+Controller tests are mandatory, add other components tests if required

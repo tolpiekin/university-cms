@@ -2,6 +2,7 @@ package ua.com.foxminded.volodymyrtolpiekin.universitycms.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -63,6 +64,12 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/api/auth/sign-in").permitAll()
                 .antMatchers("/api/auth/sign-up").hasAnyRole("STUFF", "ADMIN")
+                .antMatchers(HttpMethod.GET,("/api/courses/**")).hasAnyRole("STUDENT", "TUTOR", "STUFF", "ADMIN")
+                .antMatchers(HttpMethod.DELETE,("/api/courses/**")).hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.POST,("/api/courses/**")).hasAnyRole("STUFF", "ADMIN")
+                .antMatchers(HttpMethod.PUT,("/api/courses/**")).hasAnyRole("STUFF", "ADMIN")
+                .antMatchers(HttpMethod.PUT,("/api/courses/assign-teacher/**")).hasAnyRole("STUFF")
+                .antMatchers(HttpMethod.PUT,("/api/courses/assign-group/**")).hasAnyRole("STUFF")
                 .antMatchers("/api/admin/**").hasRole("ADMIN")
                 .antMatchers("/api/test/**").permitAll()
                 .anyRequest()
