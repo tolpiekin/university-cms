@@ -1,21 +1,48 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.controllers;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.GroupRepository;
+import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.dto.GroupDTO;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Group;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.GroupService;
 
-@Controller
+import java.util.List;
+
+@RestController
+@RequestMapping(path = "/api/groups")
 public class GroupController {
-    private final GroupRepository groupRepository;
+    private final GroupService groupService;
+    private final ModelMapper mapper;
 
-    public GroupController(GroupRepository groupRepository) {
-        this.groupRepository = groupRepository;
+    public GroupController(GroupService groupService, ModelMapper mapper) {
+        this.groupService = groupService;
+        this.mapper = mapper;
     }
 
-    @GetMapping("/groups")
-    public String showGroupsList(Model model) {
-        model.addAttribute("groups", groupRepository.findAll());
-        return "groups";
+    @GetMapping
+    public List<GroupDTO> showGroupsList() {
+        return groupService.readAllDTOs();
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public GroupDTO createGroup(@RequestBody GroupDTO groupDTO) {
+        return groupService.createGroup(groupDTO);
+    }
+
+    @DeleteMapping(path = "{groupId}")
+    public void deleteGroup(@PathVariable("groupId") Long groupId) {
+        groupService.deleteById(groupId);
+    }
+
+    @GetMapping(path = "{groupId}")
+    public GroupDTO getGroup(@PathVariable("groupId") Long groupId) {
+        return groupService.findDTOById(groupId);
+    }
+
+    @PutMapping
+    public void updateGroup(@RequestBody GroupDTO groupDTO) {
+        groupService.update(mapper.map(groupDTO, Group.class));
     }
 }
