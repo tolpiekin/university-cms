@@ -32,4 +32,9 @@ public class StudentController {
     public void deleteStudent(@PathVariable("studentId") Long studentId) {
         studentService.deleteById(studentId);
     }
+
+    @GetMapping(path="{studentId}")
+    public StudentDTO getStudent(@PathVariable("studentId") Long studentId) {
+        return studentService.readById(studentId);
+    }
 }

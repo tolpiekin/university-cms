@@ -19,4 +19,6 @@ public interface StudentService {
     List<StudentDTO> readAll();
 
     StudentDTO createStudent(StudentDTO studentDTO);
+
+    StudentDTO readById(Long studentId);
 }
