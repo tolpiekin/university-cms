@@ -45,5 +45,5 @@ public class StudentController {
     public void updateStudent(@RequestBody StudentDTO studentDTO) {
         studentService.update(mapper.map(studentDTO, Student.class));
     }
-    
+
 }
