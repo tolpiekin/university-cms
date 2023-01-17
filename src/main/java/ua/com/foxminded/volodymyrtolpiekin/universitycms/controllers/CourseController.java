@@ -22,7 +22,7 @@ public class CourseController {
 
     @GetMapping
     public List<CourseDTO> showCoursesList() {
-        return courseService.readAllDTOs();
+        return courseService.readAll();
     }
 
     @PostMapping
@@ -32,13 +32,13 @@ public class CourseController {
     }
 
     @DeleteMapping(path = "{courseId}")
-    public void deleteStudent(@PathVariable("courseId") Long courseId) {
+    public void deleteCourse(@PathVariable("courseId") Long courseId) {
         courseService.deleteById(courseId);
     }
 
     @GetMapping(path = "{courseId}")
     public CourseDTO getCourse(@PathVariable("courseId") Long courseId) {
-        return courseService.findDTOById(courseId);
+        return courseService.readById(courseId);
     }
 
     @PutMapping

@@ -1,5 +1,6 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.service;
 
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.dto.GroupDTO;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Group;
 
 import java.util.List;
@@ -14,4 +15,10 @@ public interface GroupService {
     Group update(Group group);
 
     void deleteById(Long id);
+
+    List<GroupDTO> readAll();
+
+    GroupDTO createGroup(GroupDTO groupDTO);
+
+    GroupDTO readById(Long groupId);
 }
