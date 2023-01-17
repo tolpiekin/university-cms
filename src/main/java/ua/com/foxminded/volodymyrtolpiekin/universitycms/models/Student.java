@@ -11,7 +11,8 @@ import javax.persistence.*;
 @Table(name = "students")
 public class Student extends Person{
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+
     private Long id;
     private String name;
     @ManyToOne
