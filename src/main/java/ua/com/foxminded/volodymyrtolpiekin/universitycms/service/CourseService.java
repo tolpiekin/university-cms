@@ -16,9 +16,9 @@ public interface CourseService {
 
     void deleteById(Long id);
 
-    List<CourseDTO> readAllDTOs();
+    List<CourseDTO> readAll();
 
     CourseDTO createCourse(CourseDTO courseDTO);
 
-    CourseDTO findDTOById(Long courseId);
+    CourseDTO readById(Long courseId);
 }

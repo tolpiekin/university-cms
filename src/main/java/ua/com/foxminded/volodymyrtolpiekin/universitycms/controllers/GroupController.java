@@ -22,7 +22,7 @@ public class GroupController {
 
     @GetMapping
     public List<GroupDTO> showGroupsList() {
-        return groupService.readAllDTOs();
+        return groupService.readAll();
     }
 
     @PostMapping
@@ -38,7 +38,7 @@ public class GroupController {
 
     @GetMapping(path = "{groupId}")
     public GroupDTO getGroup(@PathVariable("groupId") Long groupId) {
-        return groupService.findDTOById(groupId);
+        return groupService.readById(groupId);
     }
 
     @PutMapping

@@ -52,7 +52,7 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public List<GroupDTO> readAllDTOs() {
+    public List<GroupDTO> readAll() {
         return findAll()
                 .stream()
                 .map(course -> mapper.map(course, GroupDTO.class))
@@ -66,7 +66,7 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public GroupDTO findDTOById(Long groupId) {
+    public GroupDTO readById(Long groupId) {
         return mapper.map(findById(groupId), GroupDTO.class);
     }
 }

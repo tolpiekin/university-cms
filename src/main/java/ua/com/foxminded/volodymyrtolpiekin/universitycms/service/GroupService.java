@@ -16,9 +16,9 @@ public interface GroupService {
 
     void deleteById(Long id);
 
-    List<GroupDTO> readAllDTOs();
+    List<GroupDTO> readAll();
 
     GroupDTO createGroup(GroupDTO groupDTO);
 
-    GroupDTO findDTOById(Long groupId);
+    GroupDTO readById(Long groupId);
 }
