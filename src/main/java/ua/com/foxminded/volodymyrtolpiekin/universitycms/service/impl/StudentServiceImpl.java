@@ -57,4 +57,10 @@ public class StudentServiceImpl implements StudentService {
                 .map(student -> mapper.map(student, StudentDTO.class))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public StudentDTO createStudent(StudentDTO studentDTO) {
+        Student student = mapper.map(studentDTO, Student.class);
+        return mapper.map(addStudent(student), StudentDTO.class);
+    }
 }

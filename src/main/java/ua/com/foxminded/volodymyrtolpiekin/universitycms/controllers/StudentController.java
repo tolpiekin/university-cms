@@ -1,9 +1,9 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.dto.StudentDTO;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Student;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.StudentService;
 
 import java.util.List;
@@ -20,5 +20,11 @@ public class StudentController {
     @GetMapping
     public List<StudentDTO> showStudentsList() {
         return studentService.readAll();
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public StudentDTO createStudent(@RequestBody StudentDTO studentDTO) {
+        return studentService.createStudent(studentDTO);
     }
 }
