@@ -1,5 +1,6 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.controllers;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.dto.StudentDTO;
@@ -12,9 +13,11 @@ import java.util.List;
 @RequestMapping("/api/students")
 public class StudentController {
     private final StudentService studentService;
+    private final ModelMapper mapper;
 
-    public StudentController(StudentService studentService) {
+    public StudentController(StudentService studentService, ModelMapper mapper) {
         this.studentService = studentService;
+        this.mapper = mapper;
     }
 
     @GetMapping
@@ -37,4 +40,10 @@ public class StudentController {
     public StudentDTO getStudent(@PathVariable("studentId") Long studentId) {
         return studentService.readById(studentId);
     }
+
+    @PutMapping
+    public void updateStudent(@RequestBody StudentDTO studentDTO) {
+        studentService.update(mapper.map(studentDTO, Student.class));
+    }
+    
 }
