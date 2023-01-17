@@ -1,13 +1,29 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.models;
 
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
 import javax.persistence.*;
 
+@Data
+@RequiredArgsConstructor
 @Entity
 @Table(name = "students")
 public class Student extends Person{
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private Long id;
+    private String name;
+    @ManyToOne
+    private Group group;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @Override
     public String getName() {
@@ -18,22 +34,6 @@ public class Student extends Person{
     public void setName(String name) {
         this.name = name;
     }
-
-    private String name;
-    @ManyToOne
-    private Group group;
-
-    public Student() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Group getGroup() {
         return group;
     }

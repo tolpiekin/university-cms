@@ -1,21 +1,24 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.controllers;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.StudentRepository;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.dto.StudentDTO;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.StudentService;
 
-@Controller
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/students")
 public class StudentController {
-    private final StudentRepository studentRepository;
+    private final StudentService studentService;
 
-    public StudentController(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
     }
 
-    @GetMapping("/students")
-    public String showStudentsList(Model model) {
-        model.addAttribute("students", studentRepository.findAll());
-        return "students";
+    @GetMapping
+    public List<StudentDTO> showStudentsList() {
+        return studentService.readAll();
     }
 }

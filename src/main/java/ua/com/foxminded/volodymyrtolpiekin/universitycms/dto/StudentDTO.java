@@ -10,5 +10,6 @@ import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Group;
 @AllArgsConstructor
 public class StudentDTO {
     private Long id;
-    private Group group;
+    private String name;
+    private Long groupId;
 }

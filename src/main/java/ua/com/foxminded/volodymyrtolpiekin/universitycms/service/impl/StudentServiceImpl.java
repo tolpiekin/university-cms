@@ -1,21 +1,26 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.service.impl;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.dto.StudentDTO;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Student;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.StudentRepository;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.StudentService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
+    private final ModelMapper mapper;
 
-    public StudentServiceImpl(StudentRepository studentRepository) {
+    public StudentServiceImpl(StudentRepository studentRepository, ModelMapper mapper) {
         this.studentRepository = studentRepository;
+        this.mapper = mapper;
     }
 
     @Override
@@ -43,5 +48,13 @@ public class StudentServiceImpl implements StudentService {
     public void deleteById(Long id){
         findById(id);
         studentRepository.deleteById(id);
+    }
+
+    @Override
+    public List<StudentDTO> readAll() {
+        return findAll()
+                .stream()
+                .map(student -> mapper.map(student, StudentDTO.class))
+                .collect(Collectors.toList());
     }
 }
