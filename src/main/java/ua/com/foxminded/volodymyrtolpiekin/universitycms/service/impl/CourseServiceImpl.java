@@ -58,7 +58,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<CourseDTO> readAll() {
+    public List<CourseDTO> getAll() {
         return findAll()
                 .stream()
                 .map(course -> mapper.map(course, CourseDTO.class))
@@ -74,5 +74,12 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public CourseDTO readById(Long courseId) {
         return mapper.map(findById(courseId), CourseDTO.class);
+    }
+
+    @Override
+    public CourseDTO update(CourseDTO courseDTO) {
+        Course course = mapper.map(courseDTO, Course.class);
+        Course returnedCourse = update(course);
+        return mapper.map(returnedCourse, CourseDTO.class);
     }
 }

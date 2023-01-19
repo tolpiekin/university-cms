@@ -1,28 +1,22 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.controllers;
 
-import org.modelmapper.ModelMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.dto.CourseDTO;
-import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Course;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.CourseService;
 
 import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/courses")
+@RequiredArgsConstructor
 public class CourseController {
     private final CourseService courseService;
-    private final ModelMapper mapper;
-
-    public CourseController(CourseService courseService, ModelMapper mapper) {
-        this.courseService = courseService;
-        this.mapper = mapper;
-    }
 
     @GetMapping
     public List<CourseDTO> showCoursesList() {
-        return courseService.readAll();
+        return courseService.getAll();
     }
 
     @PostMapping
@@ -42,17 +36,17 @@ public class CourseController {
     }
 
     @PutMapping
-    public void updateCourse(@RequestBody CourseDTO courseDTO) {
-        courseService.update(mapper.map(courseDTO, Course.class));
+    public CourseDTO updateCourse(@RequestBody CourseDTO courseDTO) {
+        return courseService.update(courseDTO);
     }
 
     @PutMapping(path = "assign-teacher/{courseId}")
-    public Course assignTeacher(@RequestBody CourseDTO courseDTO) {
-        return courseService.update(mapper.map(courseDTO, Course.class));
+    public CourseDTO assignTeacher(@RequestBody CourseDTO courseDTO) {
+        return courseService.update(courseDTO);
     }
 
     @PutMapping(path = "assign-group/{courseId}")
-    public void assignGroup(@RequestBody CourseDTO courseDTO) {
-        courseService.update(mapper.map(courseDTO, Course.class));
+    public CourseDTO assignGroup(@RequestBody CourseDTO courseDTO) {
+        return courseService.update(courseDTO);
     }
 }

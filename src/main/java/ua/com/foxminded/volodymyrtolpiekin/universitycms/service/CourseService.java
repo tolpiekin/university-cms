@@ -16,9 +16,11 @@ public interface CourseService {
 
     void deleteById(Long id);
 
-    List<CourseDTO> readAll();
+    List<CourseDTO> getAll();
 
     CourseDTO createCourse(CourseDTO courseDTO);
 
     CourseDTO readById(Long courseId);
+
+    CourseDTO update(CourseDTO courseDTO);
 }

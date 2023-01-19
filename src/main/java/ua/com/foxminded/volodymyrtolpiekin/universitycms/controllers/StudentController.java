@@ -1,21 +1,43 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.controllers;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.StudentRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.dto.StudentDTO;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.StudentService;
 
-@Controller
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/students")
+@RequiredArgsConstructor
 public class StudentController {
-    private final StudentRepository studentRepository;
+    private final StudentService studentService;
 
-    public StudentController(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
+    @GetMapping
+    public List<StudentDTO> showStudentsList() {
+        return studentService.getAll();
     }
 
-    @GetMapping("/students")
-    public String showStudentsList(Model model) {
-        model.addAttribute("students", studentRepository.findAll());
-        return "students";
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public StudentDTO createStudent(@RequestBody StudentDTO studentDTO) {
+        return studentService.createStudent(studentDTO);
     }
+
+    @DeleteMapping(path = "{studentId}")
+    public void deleteStudent(@PathVariable("studentId") Long studentId) {
+        studentService.deleteById(studentId);
+    }
+
+    @GetMapping(path="{studentId}")
+    public StudentDTO getStudent(@PathVariable("studentId") Long studentId) {
+        return studentService.readById(studentId);
+    }
+
+    @PutMapping
+    public StudentDTO updateStudent(@RequestBody StudentDTO studentDTO) {
+        return studentService.update(studentDTO);
+    }
+
 }
