@@ -1,5 +1,6 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.dto.CourseDTO;
@@ -9,12 +10,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/courses")
+@RequiredArgsConstructor
 public class CourseController {
     private final CourseService courseService;
-
-    public CourseController(CourseService courseService) {
-        this.courseService = courseService;
-    }
 
     @GetMapping
     public List<CourseDTO> showCoursesList() {
