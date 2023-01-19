@@ -51,7 +51,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<StudentDTO> readAll() {
+    public List<StudentDTO> getAll() {
         return findAll()
                 .stream()
                 .map(student -> mapper.map(student, StudentDTO.class))

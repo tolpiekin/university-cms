@@ -16,7 +16,7 @@ public class GroupController {
 
     @GetMapping
     public List<GroupDTO> showGroupsList() {
-        return groupService.readAll();
+        return groupService.getAll();
     }
 
     @PostMapping

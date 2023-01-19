@@ -16,7 +16,7 @@ public class StudentController {
 
     @GetMapping
     public List<StudentDTO> showStudentsList() {
-        return studentService.readAll();
+        return studentService.getAll();
     }
 
     @PostMapping

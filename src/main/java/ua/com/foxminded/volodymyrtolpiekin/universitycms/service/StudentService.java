@@ -16,7 +16,7 @@ public interface StudentService {
 
     void deleteById(Long id);
 
-    List<StudentDTO> readAll();
+    List<StudentDTO> getAll();
 
     StudentDTO createStudent(StudentDTO studentDTO);
 

@@ -58,7 +58,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<CourseDTO> readAll() {
+    public List<CourseDTO> getAll() {
         return findAll()
                 .stream()
                 .map(course -> mapper.map(course, CourseDTO.class))

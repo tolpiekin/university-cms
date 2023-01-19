@@ -52,7 +52,7 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public List<GroupDTO> readAll() {
+    public List<GroupDTO> getAll() {
         return findAll()
                 .stream()
                 .map(course -> mapper.map(course, GroupDTO.class))

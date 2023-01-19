@@ -16,7 +16,7 @@ public class CourseController {
 
     @GetMapping
     public List<CourseDTO> showCoursesList() {
-        return courseService.readAll();
+        return courseService.getAll();
     }
 
     @PostMapping
