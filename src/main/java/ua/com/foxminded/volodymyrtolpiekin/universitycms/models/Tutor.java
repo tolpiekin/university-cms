@@ -6,15 +6,6 @@ import java.util.List;
 @Entity
 @Table(name = "tutors")
 public class Tutor extends Person {
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
 
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
@@ -65,4 +56,15 @@ public class Tutor extends Person {
                 ", courses=" + courses +
                 '}';
     }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }

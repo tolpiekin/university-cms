@@ -7,9 +7,7 @@ import org.springframework.web.server.ResponseStatusException;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.dto.CourseDTO;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Course;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.CourseRepository;
-import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.GroupService;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.CourseService;
-import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.TutorService;
 
 import java.util.List;
 
@@ -18,14 +16,10 @@ import static java.util.stream.Collectors.toList;
 @Service
 public class CourseServiceImpl implements CourseService {
     private final CourseRepository courseRepository;
-    private final GroupService groupService;
-    private final TutorService tutorService;
     private final ModelMapper mapper;
 
-    public CourseServiceImpl(CourseRepository courseRepository, GroupService groupService, TutorService tutorService, ModelMapper mapper) {
+    public CourseServiceImpl(CourseRepository courseRepository, ModelMapper mapper) {
         this.courseRepository = courseRepository;
-        this.groupService = groupService;
-        this.tutorService = tutorService;
         this.mapper = mapper;
     }
 
