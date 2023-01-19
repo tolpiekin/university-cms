@@ -21,4 +21,6 @@ public interface GroupService {
     GroupDTO createGroup(GroupDTO groupDTO);
 
     GroupDTO readById(Long groupId);
+
+    GroupDTO update(GroupDTO groupDTO);
 }

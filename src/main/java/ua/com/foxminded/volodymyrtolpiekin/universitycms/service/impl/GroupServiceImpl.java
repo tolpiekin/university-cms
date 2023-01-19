@@ -69,4 +69,11 @@ public class GroupServiceImpl implements GroupService {
     public GroupDTO readById(Long groupId) {
         return mapper.map(findById(groupId), GroupDTO.class);
     }
+
+    @Override
+    public GroupDTO update(GroupDTO groupDTO) {
+        Group group = mapper.map(groupDTO, Group.class);
+        Group returnedGroup = update(group);
+        return mapper.map(returnedGroup, GroupDTO.class);
+    }
 }

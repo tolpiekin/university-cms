@@ -21,4 +21,6 @@ public interface StudentService {
     StudentDTO createStudent(StudentDTO studentDTO);
 
     StudentDTO readById(Long studentId);
+
+    StudentDTO update(StudentDTO studentDTO);
 }

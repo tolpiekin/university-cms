@@ -69,4 +69,11 @@ public class StudentServiceImpl implements StudentService {
         Student student = findById(studentId);
         return mapper.map(student, StudentDTO.class);
     }
+
+    @Override
+    public StudentDTO update(StudentDTO studentDTO) {
+        Student student = mapper.map(studentDTO, Student.class);
+        Student returnedStudent= update(student);
+        return mapper.map(returnedStudent, StudentDTO.class);
+    }
 }
