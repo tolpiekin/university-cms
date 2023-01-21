@@ -1,5 +1,6 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -12,16 +13,12 @@ import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.TutorService;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 public class TutorServiceImpl implements TutorService {
 
     private final TutorRepository tutorRepository;
     private final ModelMapper mapper;
-
-    public TutorServiceImpl(TutorRepository tutorRepository, ModelMapper mapper) {
-        this.tutorRepository = tutorRepository;
-        this.mapper = mapper;
-    }
 
     @Override
     public Tutor addTutor(Tutor tutor){
@@ -65,7 +62,7 @@ public class TutorServiceImpl implements TutorService {
     }
 
     @Override
-    public TutorDTO readById(Long tutorId) {
+    public TutorDTO getById(Long tutorId) {
         return mapper.map(findById(tutorId), TutorDTO.class);
     }
 

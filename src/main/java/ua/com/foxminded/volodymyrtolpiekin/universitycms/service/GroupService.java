@@ -20,7 +20,7 @@ public interface GroupService {
 
     GroupDTO createGroup(GroupDTO groupDTO);
 
-    GroupDTO readById(Long groupId);
+    GroupDTO getById(Long groupId);
 
     GroupDTO update(GroupDTO groupDTO);
 }

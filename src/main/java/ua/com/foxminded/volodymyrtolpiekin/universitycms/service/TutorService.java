@@ -20,7 +20,7 @@ public interface TutorService {
 
     TutorDTO createTutor(TutorDTO tutorDTO);
 
-    TutorDTO readById(Long tutorId);
+    TutorDTO getById(Long tutorId);
 
     TutorDTO update(TutorDTO tutorDTO);
 }

@@ -32,7 +32,7 @@ public class StudentController {
 
     @GetMapping(path="{studentId}")
     public StudentDTO getStudent(@PathVariable("studentId") Long studentId) {
-        return studentService.readById(studentId);
+        return studentService.getById(studentId);
     }
 
     @PutMapping

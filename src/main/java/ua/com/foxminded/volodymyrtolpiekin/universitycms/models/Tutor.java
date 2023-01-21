@@ -1,8 +1,13 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.models;
 
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
 import javax.persistence.*;
 import java.util.List;
 
+@Data
+@RequiredArgsConstructor
 @Entity
 @Table(name = "tutors")
 public class Tutor extends Person {
@@ -13,9 +18,6 @@ public class Tutor extends Person {
     private String name;
     @OneToMany(mappedBy = "tutor")
     private List<Course> courses;
-
-    public Tutor() {
-    }
 
     public Long getId() {
         return id;
@@ -56,15 +58,4 @@ public class Tutor extends Person {
                 ", courses=" + courses +
                 '}';
     }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
 }

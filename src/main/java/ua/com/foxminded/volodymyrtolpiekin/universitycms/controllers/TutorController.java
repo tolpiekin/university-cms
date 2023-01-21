@@ -2,10 +2,8 @@ package ua.com.foxminded.volodymyrtolpiekin.universitycms.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.dto.TutorDTO;
-import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.TutorRepository;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.TutorService;
 
 import java.util.List;
@@ -34,7 +32,7 @@ public class TutorController {
 
     @GetMapping(path="{tutorId}")
     public TutorDTO getTutor(@PathVariable("tutorId") Long tutorId) {
-        return tutorService.readById(tutorId);
+        return tutorService.getById(tutorId);
     }
 
     @PutMapping

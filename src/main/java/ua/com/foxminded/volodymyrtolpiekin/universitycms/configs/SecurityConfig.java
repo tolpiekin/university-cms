@@ -20,10 +20,11 @@ import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.impl.UserDetail
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
-    public static final String API_COURSES = "/api/courses/**";
-    public static final String API_GROUPS = "/api/groups/**";
-    public static final String API_STUDENTS = "/api/students/**";
-    public static final String API_TUTORS = "/api/tutors/**";
+    private static final String API_COURSES = "/api/courses/**";
+    private static final String API_GROUPS = "/api/groups/**";
+    private static final String API_STUDENTS = "/api/students/**";
+    private static final String API_TUTORS = "/api/tutors/**";
+
     private final UserDetailsServiceImpl userDetailsService;
     private final AuthEntryPointJwt unauthorizedHandler;
 
