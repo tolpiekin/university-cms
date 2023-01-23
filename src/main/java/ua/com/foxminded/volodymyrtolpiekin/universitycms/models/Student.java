@@ -9,7 +9,7 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "students")
-public class Student extends Person{
+public class Student {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
 
@@ -17,31 +17,6 @@ public class Student extends Person{
     private String name;
     @ManyToOne
     private Group group;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-    public Group getGroup() {
-        return group;
-    }
-
-    public void setGroup(Group group) {
-        this.group = group;
-    }
 
     @Override
     public boolean equals(Object o) {

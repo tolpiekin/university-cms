@@ -10,7 +10,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "tutors")
-public class Tutor extends Person {
+public class Tutor {
 
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
@@ -18,22 +18,6 @@ public class Tutor extends Person {
     private String name;
     @OneToMany(mappedBy = "tutor")
     private List<Course> courses;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public List<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
-    }
 
     @Override
     public boolean equals(Object o) {
