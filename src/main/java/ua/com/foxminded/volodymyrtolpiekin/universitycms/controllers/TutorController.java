@@ -1,21 +1,43 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.controllers;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.TutorRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.dto.TutorDTO;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.TutorService;
 
-@Controller
+import java.util.List;
+
+@RestController
+@RequestMapping(path = "/api/tutors")
+@RequiredArgsConstructor
 public class TutorController {
-    private final TutorRepository tutorRepository;
+    private final TutorService tutorService;
 
-    public TutorController(TutorRepository tutorRepository) {
-        this.tutorRepository = tutorRepository;
+    @GetMapping
+    public List<TutorDTO> showTutorsList() {
+        return tutorService.getAll();
     }
 
-    @GetMapping("/tutors")
-    public String showTutors(Model model) {
-        model.addAttribute("tutors", tutorRepository.findAll());
-        return "tutors";
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public TutorDTO createTutor(@RequestBody TutorDTO tutorDTO) {
+        return tutorService.createTutor(tutorDTO);
     }
+
+    @DeleteMapping(path = "{tutorId}")
+    public void deleteTutor(@PathVariable("tutorId") Long tutorId) {
+        tutorService.deleteById(tutorId);
+    }
+
+    @GetMapping(path="{tutorId}")
+    public TutorDTO getTutor(@PathVariable("tutorId") Long tutorId) {
+        return tutorService.getById(tutorId);
+    }
+
+    @PutMapping
+    public TutorDTO updateTutor(@RequestBody TutorDTO tutorDTO) {
+        return tutorService.update(tutorDTO);
+    }
+
 }

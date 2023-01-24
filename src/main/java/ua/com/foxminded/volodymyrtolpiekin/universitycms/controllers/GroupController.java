@@ -32,7 +32,7 @@ public class GroupController {
 
     @GetMapping(path = "{groupId}")
     public GroupDTO getGroup(@PathVariable("groupId") Long groupId) {
-        return groupService.readById(groupId);
+        return groupService.getById(groupId);
     }
 
     @PutMapping

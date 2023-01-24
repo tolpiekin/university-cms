@@ -1,22 +1,24 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.service.impl;
 
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import ua.com.foxminded.volodymyrtolpiekin.universitycms.dto.TutorDTO;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.models.Tutor;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.repository.TutorRepository;
 import ua.com.foxminded.volodymyrtolpiekin.universitycms.service.TutorService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 public class TutorServiceImpl implements TutorService {
 
     private final TutorRepository tutorRepository;
-
-    public TutorServiceImpl(TutorRepository tutorRepository) {
-        this.tutorRepository = tutorRepository;
-    }
+    private final ModelMapper mapper;
 
     @Override
     public Tutor addTutor(Tutor tutor){
@@ -43,5 +45,30 @@ public class TutorServiceImpl implements TutorService {
     public void deleteById(Long id){
         findById(id);
         tutorRepository.deleteById(id);
+    }
+
+    @Override
+    public List<TutorDTO> getAll() {
+        return findAll()
+                .stream()
+                .map(tutor -> mapper.map(tutor, TutorDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public TutorDTO createTutor(TutorDTO tutorDTO) {
+        Tutor tutor = mapper.map(tutorDTO, Tutor.class);
+        return mapper.map(addTutor(tutor), TutorDTO.class);
+    }
+
+    @Override
+    public TutorDTO getById(Long tutorId) {
+        return mapper.map(findById(tutorId), TutorDTO.class);
+    }
+
+    @Override
+    public TutorDTO update(TutorDTO tutorDTO) {
+        Tutor tutor = update(mapper.map(tutorDTO, Tutor.class));
+        return mapper.map(tutor, TutorDTO.class);
     }
 }

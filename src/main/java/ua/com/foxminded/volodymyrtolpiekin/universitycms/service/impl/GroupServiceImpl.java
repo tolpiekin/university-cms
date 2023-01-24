@@ -1,5 +1,6 @@
 package ua.com.foxminded.volodymyrtolpiekin.universitycms.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -13,16 +14,12 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
+@RequiredArgsConstructor
 @Service
 public class GroupServiceImpl implements GroupService {
 
     private final GroupRepository groupRepository;
     private final ModelMapper mapper;
-
-    public GroupServiceImpl(GroupRepository groupRepository, ModelMapper mapper) {
-        this.groupRepository = groupRepository;
-        this.mapper = mapper;
-    }
 
     @Override
     public Group addGroup(Group group){
@@ -66,7 +63,7 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public GroupDTO readById(Long groupId) {
+    public GroupDTO getById(Long groupId) {
         return mapper.map(findById(groupId), GroupDTO.class);
     }
 
