@@ -24,6 +24,7 @@ public class SecurityConfig {
     private static final String API_GROUPS = "/api/groups/**";
     private static final String API_STUDENTS = "/api/students/**";
     private static final String API_TUTORS = "/api/tutors/**";
+    private static final String API_SCHEDULES = "/api/schedules/**";
 
     private final UserDetailsServiceImpl userDetailsService;
     private final AuthEntryPointJwt unauthorizedHandler;
@@ -69,10 +70,10 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/api/auth/sign-in").permitAll()
                 .antMatchers("/api/auth/sign-up").hasAnyRole("STUFF", "ADMIN")
-                .antMatchers(HttpMethod.GET,(new String[] {API_COURSES, API_GROUPS, API_STUDENTS, API_TUTORS})).hasAnyRole("STUDENT", "TUTOR", "STUFF", "ADMIN")
-                .antMatchers(HttpMethod.DELETE,(new String[] {API_COURSES, API_GROUPS, API_STUDENTS, API_TUTORS})).hasAnyRole("ADMIN")
-                .antMatchers(HttpMethod.POST,(new String[] {API_COURSES, API_GROUPS, API_STUDENTS, API_TUTORS})).hasAnyRole("STUFF", "ADMIN")
-                .antMatchers(HttpMethod.PUT,(new String[] {API_COURSES, API_GROUPS, API_STUDENTS, API_TUTORS})).hasAnyRole("STUFF", "ADMIN")
+                .antMatchers(HttpMethod.GET,(new String[] {API_COURSES, API_GROUPS, API_STUDENTS, API_TUTORS, API_SCHEDULES})).hasAnyRole("STUDENT", "TUTOR", "STUFF", "ADMIN")
+                .antMatchers(HttpMethod.DELETE,(new String[] {API_COURSES, API_GROUPS, API_STUDENTS, API_TUTORS, API_SCHEDULES})).hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.POST,(new String[] {API_COURSES, API_GROUPS, API_STUDENTS, API_TUTORS, API_SCHEDULES})).hasAnyRole("STUFF", "ADMIN")
+                .antMatchers(HttpMethod.PUT,(new String[] {API_COURSES, API_GROUPS, API_STUDENTS, API_TUTORS, API_SCHEDULES})).hasAnyRole("STUFF", "ADMIN")
                 .antMatchers(HttpMethod.PUT,("/api/courses/assign-teacher/**")).hasAnyRole("STUFF")
                 .antMatchers(HttpMethod.PUT,("/api/courses/assign-group/**")).hasAnyRole("STUFF")
                 .antMatchers("/api/admin/**").hasRole("ADMIN")
