@@ -73,4 +73,11 @@ public class CourseServiceImpl implements CourseService {
         Course returnedCourse = update(course);
         return mapper.map(returnedCourse, CourseDTO.class);
     }
+
+    @Override
+    public List<String> getAllNames() {
+        return getAll()
+                .stream()
+                .map(course -> course.getName()).collect(toList());
+    }
 }

@@ -23,4 +23,6 @@ public interface CourseService {
     CourseDTO getById(Long courseId);
 
     CourseDTO update(CourseDTO courseDTO);
+
+    List<String> getAllNames();
 }

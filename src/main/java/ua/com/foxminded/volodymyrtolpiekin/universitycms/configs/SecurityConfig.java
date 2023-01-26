@@ -70,6 +70,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/api/auth/sign-in").permitAll()
                 .antMatchers("/api/auth/sign-up").hasAnyRole("STUFF", "ADMIN")
+                .antMatchers("/courses").anonymous()
                 .antMatchers(HttpMethod.GET,(new String[] {API_COURSES, API_GROUPS, API_STUDENTS, API_TUTORS, API_SCHEDULES})).hasAnyRole("STUDENT", "TUTOR", "STUFF", "ADMIN")
                 .antMatchers(HttpMethod.DELETE,(new String[] {API_COURSES, API_GROUPS, API_STUDENTS, API_TUTORS, API_SCHEDULES})).hasAnyRole("ADMIN")
                 .antMatchers(HttpMethod.POST,(new String[] {API_COURSES, API_GROUPS, API_STUDENTS, API_TUTORS, API_SCHEDULES})).hasAnyRole("STUFF", "ADMIN")
